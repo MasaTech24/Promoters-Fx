@@ -1,0 +1,448 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.navigate-bars{
+  display: flex;
+}
+/* .sidebar css section  */
+.sidebar {
+  background-color: #2C3034;
+  color: white;
+  width: 60%;
+  height: 100vh;
+  max-width: 200px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: fixed;
+  top: 30px;
+  /* padding: 0 20px; */
+
+}
+.Logo-div{
+  border-bottom: 1px solid white;
+  padding-bottom: 20px ;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Logo-div h2{
+  font-size: 26px;
+  text-shadow: 0 0 3px #fff, 0 0 5px yellowgreen;
+  font-family:'Times New Roman', Times, serif;
+}
+.Logo-div h2 span{
+  color: yellowgreen;
+}
+.sidebar .sidebar-nav {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  width: 100%;
+}
+.sidebar .navbar-nav .nav-item{
+  padding: 0 20px;
+}
+.sidebar .sidebar-nav .nav-item  .link{
+  display: flex;
+  align-self: center;
+  column-gap: 10px;
+  color: #8a8a8a;
+  padding: 6px 10px;
+  width: 100%;
+  transition: .5s ease-in-out;
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+.sidebar .sidebar-nav .nav-item .link:hover{
+  background: #575962 !important;
+  border-radius: 10px;
+  color: #fff !important;
+}
+.active-nav{
+  background: #575962 !important;
+  border-radius: 10px;
+  color: #fff !important;
+  font-weight: 600;
+}
+/* main section  */
+.main{
+  width: 100%;
+}
+/* navbar section  */
+.nave-bar{
+  width: 100%;
+  background-color: #2C3034 !important;
+  color:#fff;
+  height: 10vh;
+  box-shadow: #575962;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3); 
+  position: fixed;
+  z-index: 999;
+}
+.nav-profile{
+  position: relative;
+}
+.dropdown{
+  position: absolute;
+  top: 7vh;
+  right: 0;
+  width: 260px;
+  padding: 30px;
+  font-size: 1rem;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 5px;
+  display: none;
+}
+.dropdown h4{
+  margin-bottom: 2px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: capitalize;
+  font-family: Roboto, sans-serif;  
+  color: #212529;
+}
+.dropdown p {
+  font-size: 14px;
+  line-height: 1.82;
+  word-break: break-word;
+  color: #6c757d!important;
+  margin-bottom: 5px;
+}
+.dropdown button{
+  padding: 5px 9px;
+  background-color: yellowgreen;
+  width: 100%;
+  scale: 1.05;
+}
+.toggle-btn{
+  cursor: pointer;
+}
+.toggled{
+  display: block;
+}
+.btn-div{
+  margin-left: 200px;
+}
+.btn-div button{
+  padding: 5px 16px;
+  font-size: 14px;
+}
+.btn-div button:nth-child(2){
+  background-color: transparent;
+  color: yellowgreen;
+}
+
+/* container section  */
+.dashbord-ccontainer {
+  padding: 0 25px;
+  /* height: 100vh; */
+  background-color: #212529;
+  padding-top: 40px;
+  margin-top: 58px;
+  margin-left: 200px;
+}
+.welcome-heading{
+  color: white;
+  font-family:'Times New Roman', Times, serif;
+  padding-bottom: 40px;
+}
+.Account-holding-div{
+  display: grid;
+  grid-template-columns: repeat(3, 299px);
+  column-gap: 20px;
+  row-gap: 20px;
+}
+.total-deposit-div,
+.total-profit-div,
+.acc-balance-div,
+.total-bonus-div,
+.total-referral-div,
+.total-investment-plan-div,
+.active-investment-plan-div,
+.total-withdrawals-div{
+  display: flex;
+  align-items: center;
+  background-color: #2C3034;
+  color: white;
+  padding: 1rem;
+  column-gap: 15px;
+  border-radius: 5px;
+
+}
+.total-deposit-div strong,
+.total-profit-div strong,
+.acc-balance-div strong,
+.total-bonus-div strong,
+.total-referral-div strong,
+.total-investment-plan-div strong,
+.active-investment-plan-div strong,
+.total-withdrawals-div strong{
+  font-family: Roboto, sans-serif;
+}
+.img-div img{
+  width: 25px;
+}
+.totals-p{
+  color: #8094ae;
+  font-family: Roboto, sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
+/* card section  */
+.balance-card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #8094ae;
+}
+.balance-acc-div,
+.profit-acc-div,
+.my-investment-div{
+  border: 1px solid #dbdfea;
+  padding: 1.5rem;
+  background-color: white;
+  width: 300px;
+  margin: 40px 0;
+  border-radius: 5px;
+}
+.acc-bal-p,
+.deposit-funds{
+  color: #8094ae;
+  font-family: Roboto, sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+.balance-acc-div h2,
+.my-investment-div h2{
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid yellowgreen;
+}
+.profit-acc h2{
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-size: 1.5rem;
+}
+.profit-acc{
+  display: flex;
+  align-items: flex-end;
+  column-gap: 10px;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid yellowgreen;
+}
+.profit-per{
+  color: green;
+}
+.available-funds,
+.investment-funds,
+.total-funds{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.investment-funds{
+  border-bottom: 2px solid rgb(105, 105, 105);
+}
+.available-funds strong,
+.investment-funds strong,
+.total-funds strong{
+  font-family: Roboto, sans-serif;
+}
+
+.funds-button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  margin-left: 10px;
+}
+.funds-button button:nth-child(1){
+  background-color: yellowgreen;
+  color: black;
+  padding: 5px 16px;
+  width: 100%;
+  scale: 1.05;
+}
+/* .funds-button button:nth-child(1):hover{
+  color: white;
+  border: none;
+  scale: none;
+  transition: 10 ease-in-out;
+} */
+.deposit-funds{
+  text-decoration: none;
+  padding-top: 20px;
+}
+.dashboard-copyright-div{
+  padding: 20px 0;
+}
+.dashboard-copyright-div p{
+  color: #8094ae;
+  font-family: Roboto, sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+/* Deposite Secion  */
+.account-container{
+  background-color: #2C3034;
+  padding: 1.25rem;
+  height: 80vh;
+  padding-bottom:40px;
+  border-bottom: 1px solid #8094ae;
+}
+.amount-input-div{
+  margin-bottom: 60px;
+}
+.amount-input-div h3,
+.choose-payment-div h3,
+.wallet-address-and-proof h3{
+  margin: 0;
+  color: #f8f9fa !important;
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.amount-input-div input,
+.wallet-input,
+.proof-input{
+  display: block;
+  width: 610px;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #22242A !important;
+  background-clip: padding-box;
+  /* border: 1px solid #ced4da; */
+  border: 1px solid #575962;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.payment-metthods{
+  display: grid;
+  grid-template-columns: repeat(3, 190px);
+  align-items: center;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+.btc-div,
+.usdt-div,
+.eth-div{
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  color: #f8f9fa;
+  border: 1px solid #575962;
+  border-radius: 5px;
+  padding: 20px 20px;
+  margin-bottom: 20px;
+}
+.proceed-btn,
+.make-payment{
+  border: none;
+}
+
+/* Make payment Section  */
+.mk-pm-h2{
+  text-align: center;
+}
+.mk-pymt-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.make-payment-container{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #2C3034;
+  color: #f8f9fa!important;
+  padding: 2.35rem;
+  width: 700px;
+  /* height: 80vh; */
+}
+.make-payment-container h4{
+  line-height: 1.4;
+  font-size: 1.0375rem;
+  font-family: Lato, sans-serif;
+  margin-bottom: 40px;
+}
+.selected-pm{
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 20px;
+}
+.wallet-address{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.wallet-address input{
+  width: 410px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.wallet-address button{
+  height: calc(2.25rem + 2px);
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; 
+  background-color: transparent;
+  border: 1px solid #575962;
+}
+.network-type,
+.proof-of-payment p{
+  font-size: 13px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 40px;
+}
+.proof-of-payment p{
+  margin-bottom: 20px;
+}
+.proof-of-payment input{
+  width: 250px;
+  margin-bottom: 20px;
+}
+.mk-pm-cpr{
+  margin-top: 30px;
+  border-top: 1px solid #8094ae;
+  width: 100%;
+}
