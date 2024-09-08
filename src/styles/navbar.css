@@ -132,11 +132,11 @@ button:nth-child(1):active,button:nth-child(2):active{
 @media screen and (max-width: 768px){
   header {
     position: fixed;
-    padding: 0 80px;
-    /* justify-content: flex-start; */
-    /* width: 500px; */
+    padding: 0 40px;
+    /* justify-content: center; */
+    /* width: 859px; */
   }
-  nav ul,
+  .navigation-bar ul,
   .button-container {
     display: none;
   }
@@ -149,9 +149,35 @@ button:nth-child(1):active,button:nth-child(2):active{
   }
 }
 
-@media screen and (max-width: 576px){
+@media screen and (max-width: 475px){
+  header {
+    padding: 0 20px;
+  }
+  .logo-container {
+    /* width: 200px; */
+    font-size: 10px;
+  }
+  .logo-container .logo{
+    font-size:25px;
+  }
   .dropdown-menu{
-    left: 2rem;
+    left: 0;
+    right: 0;
     width: unset;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .dropdown-menu.open {
+    margin: 0;
+    height: 300px;
+  }
+  button:nth-child(1) {
+    margin-right: 0;
+    width: 100%;
+  }
+  .rsp-button{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
   }
 }

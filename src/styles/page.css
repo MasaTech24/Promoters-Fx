@@ -7,6 +7,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+*,  
+*:before,  
+*:after {  
+  box-sizing: inherit; /* Apply box-sizing to all elements */  
+} 
 main{
   position: relative;
   display: flex;
@@ -697,19 +702,29 @@ text-align: center;
 
 /* Responsive Designs  */
 @media (max-width: 768px) {
-  /* main{
+  html, 
+  body {  
+    width: 100%;  
+    overflow-x: hidden; /* Prevent horizontal scrolling */  
+    margin: 0; /* Remove default margin */  
+    padding: 0; /* Remove default padding */  
+    box-sizing: border-box; /* Include padding and border in element's total width and height */  
+  } 
+  main{
     justify-content: space-between;
-    /* width: 100%; 
-  } */
+    width: 100%; 
+  } 
   .container {
     height: 430px; 
-    width: 1000px;
+    /* width: 859px; */
     /* width: 455px; */
   } 
+
   .overLay {
     align-items: center;
     justify-content: center;
-    padding: 0 80px;
+    padding: 0 40px;
+    width: 100%;
   }
   h1,
   .abt-content h2,
@@ -745,21 +760,21 @@ text-align: center;
   .trusted-section2 {
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 60px 80px;
+    padding: 60px 40px;
     /* width: 455px; */
-    width: 1000px;
+    /* width: 859px; */
   } 
   .about-container,
   .save-time-container {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-end;
+    justify-content: flex-start;
     row-gap: 40px;
-    width: 900px;
+    /* width: 600px; */
   }
   .abt-img,
   .pltform-img-div{
-    width: 800px;
+    /* width: 730px; */
   }
   .abt-img img{
     width: 100%;
@@ -779,9 +794,24 @@ text-align: center;
   .abt-content p,
   .save-time-contents p {
     font-size: 18px;
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 40px;
-    /* width: 580px; */
+    width: 600px;
+  }
+  .bank-grade-content p, 
+  .risk-mng-content p, 
+  .award-content p, 
+  .automatic-content p, 
+  .invest-plan-p, 
+  .basic-plan p, 
+  .silver-plan p, 
+  .gold-plan p, 
+  .platinum-plan p, 
+  .currency-converter-p, 
+  .crypto-currency-div p, 
+  .local-currency-div p {
+    width: 320px;
+    font-size: 14px;
   }
   .three-div {
     align-items: center;
@@ -921,13 +951,30 @@ text-align: center;
     width: 100%;
   }
   .coins-div img{
-    width: 180px;
+    width: 120px;
   }
 
   /* footer section  */
   .footer{
-    width: 1000px;
+    width: 859px;
+    padding: 60px 40px;
     /* height: max-content; */
+  }
+  .sub-newslatter-div h2 {
+    font-size: 25px;
+  }
+  .footer-logo {  
+    width: 300px;
+  }
+  .footer-logo h2{
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  .footer-logo p {
+    width: 220px;
+  }
+  .footer-div{
+    column-gap: 10px;
   }
   .newslatter-div, 
   .footer-div {
@@ -946,10 +993,109 @@ text-align: center;
     flex-direction: row;
   }
 }
-@media (max-width: 375px){
- body{
-  zoom: 1;
-  max-width: 100%;
-  overflow-x: hidden;
- }
+@media screen and (max-width: 475px){
+  .overLay {
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 20px;
+  }
+  h1, 
+  .abt-content h2, 
+  .save-time-contents h2, 
+  .trs-us-h2 {
+    font-size: 1.6rem;
+    width: 310px;
+    padding-bottom: 20px;
+  }
+  .overLay p {
+    font-size: 1.2rem;
+    width: 320px;
+  }
+  button:nth-child(2) {
+    display: block;
+    width: 100%;
+  }
+  .abt-section, 
+  .save-time-section, 
+  .why-chooseUs-section, 
+  .platform-section, 
+  .investment-plan-section, 
+  .trusted-section2 {
+    padding: 60px 20px;
+  }
+  .about-container, .save-time-container {
+    width: 100%;
+  }
+  .abt-img img {
+    width: 100%;
+    height: 200px;
+  }
+  .abt-content, 
+  .save-time-contents {
+    width: 100%;
+  }
+  .abt-content p, 
+  .save-time-contents p {
+    font-size: 16px;
+    width: 100%;
+  }
+  .abt-content button {
+    width: 100%;
+  }
+  .secure-div, 
+  .multi-currency-div, 
+  .currency-exchange-div {
+    background-color: #212224;
+    margin: 0.5em;
+    width: 100px;
+    height: 160px;
+    padding: 15px;
+  }
+  .save-time-img-div img {
+    width: 100%;
+    height: 300px;
+  }
+  .why-chooseUs-content {
+    grid-template-columns: repeat(1, 360px);
+  }
+  .plt-frm-img {
+    width: 100%;
+  }
+  .steps-contents-div {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+  .abt-img, 
+  .pltform-img-div {
+    width: 100%;
+  } 
+  .pltform-content span {
+    font-size: 8px;
+    width: 100%;
+  }
+  .platform-h2 {
+    font-size: 1.6rem;
+    width: 300px;
+  }
+  .mac-div, .windows-div, .android-div {
+    width: 95px;
+    height: 95px;
+  }
+  .choose-us-h2, 
+  .investment-plan-section h2 {
+    font-size: 2rem;
+  }
+  .currency-coverter{
+    width: 100%;
+  }
+  .currency-coverter-div {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    column-gap: 0;
+  }
+  .change-div {
+    column-gap: 70px;
+  }
 }

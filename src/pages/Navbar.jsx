@@ -18,7 +18,7 @@ function NavigationBar () {
   //   return[toggleValue, toggler]
   // }
 
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   // const [signUpSubmit, setSignUpSubmit] = useState()
   const navigate = useNavigate()
 
@@ -32,7 +32,9 @@ function NavigationBar () {
   return(
     <header>
       <div className='logo-container'>
-        <strong className='logo'>Promoters <i>FX</i></strong>
+        <strong className='logo'>
+            Promoters
+          <span>FX</span></strong>
       </div>
       
       <nav className='navigation-bar'>
@@ -86,7 +88,7 @@ function NavigationBar () {
             <li><a href="#">About Us</a></li>
             <li><a href="#">Plans</a></li>
             <li><a href="#">Contact Us</a></li>
-            <li>
+            <li className='rsp-button'>
               <button>
                 Sign In 
                 <span>

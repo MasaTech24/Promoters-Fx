@@ -22,7 +22,7 @@ function DepositPage ({username, email}) {
           <div className="account-container">
             <div className="amount-input-div">
               <h3>Amount</h3>
-              <input type="number"  placeholder="Enter Amount to deposits"/>
+              <input type="number"  placeholder="Enter Amount to deposits" required/>
             </div>
 
             <div className="choose-payment-div">
