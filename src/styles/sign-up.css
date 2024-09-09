@@ -131,10 +131,9 @@ select:focus{
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 .submit-btn-div input{
-  padding: 10px 20px;
+  padding: 10px 30px;
   width: 100%;
   background-color: #FE7C0A !important;
   border-color: #FE7C0A !important;
@@ -145,6 +144,7 @@ select:focus{
   letter-spacing: 0.5px;
   border-radius: 6px;
   margin-bottom: 40px;
+  cursor: pointer;
 }
 
 /* Already have an account  */
