@@ -37,7 +37,7 @@ function LandingPage() {
         <section className='abt-section'>
           <div className="about-container">
             <div className='abt-img'>
-              <img src="../public/r.png" alt=""  />
+              <img src="r.png" alt=""  />
             </div>
             <div className='abt-content'>
               <h2>Who we are</h2>
@@ -78,7 +78,7 @@ function LandingPage() {
             </div>
 
             <div className='save-time-img-div'>
-              <img src="../public/btc-removebg.png" alt=""/>
+              <img src="btc-removebg.png" alt=""/>
             </div>
           </div>
         </section>
