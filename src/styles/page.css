@@ -543,6 +543,7 @@ text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  column-gap: 20px;
 }
 .card-1,
 .card-2,
@@ -1089,13 +1090,71 @@ text-align: center;
     width: 100%;
   }
   .currency-coverter-div {
-    width: 400px;
+    width: 100%;
+    /* flex-direction: column; */
+  }
+  .crypto-currency-div, 
+  .local-currency-div {
+    padding: 30px;
+    width: 100px;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    column-gap: 0;
+    justify-content: center;
+    flex-direction: column;
   }
   .change-div {
     column-gap: 70px;
+  }
+  .trusted-section h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  .trusted-div {
+    display: grid;
+    grid-template-columns: repeat(2, 130px);
+    row-gap: 20px;
+    width: 100%;
+  }
+  .coins-div {
+    overflow-y: scroll;
+    column-gap: 20px;
+  }
+  .coins-div img {
+    width: 120px;
+  }
+
+  /* footer section */
+  .footer {
+    width: 100%;
+    padding: 60px 10px;
+    height: max-content;
+  }
+  .newslatter-div, 
+  .footer-div {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10px 40px 10px;
+    row-gap: 20px;
+  }
+  .sub-newslatter-div h2 {
+    font-size: 20px;
+    width: 100%;
+  }
+  .sub-newslatter-div p {
+    width: 100%;
+    font-size: 0.8rem
+  }
+  .newslatter-input-div input {
+    width: 200px;
+  }
+  .newslatter-input-div .resp-sub-btn{
+    width: 135px;
+  }
+  .footer-logo {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .footer-logo p {
+    width: 100%;
   }
 }

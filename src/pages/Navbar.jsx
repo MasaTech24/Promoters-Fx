@@ -29,6 +29,9 @@ function NavigationBar () {
   const handleSignUp = () => {
     navigate('/sign-up');
   } 
+  const handleSignIn = () => {
+    navigate('/sign-in');
+  } 
   return(
     <header>
       <div className='logo-container'>
@@ -88,13 +91,8 @@ function NavigationBar () {
             <li><a href="#">About Us</a></li>
             <li><a href="#">Plans</a></li>
             <li><a href="#">Contact Us</a></li>
-            <li className='rsp-button'>
-              <button>
-                Sign In 
-                <span>
-                </span>
-              </button>
-              <button>Sign Up</button>
+            <li className='rsp-button'>                <button onClick={handleSignIn}> Sign In </button>
+              <button onClick={handleSignUp}>Sign Up</button>
             </li>
           </div>
         : <></>}

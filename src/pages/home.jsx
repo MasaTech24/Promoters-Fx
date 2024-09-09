@@ -2,8 +2,17 @@ import React from 'react';
 import ParticlesComponent from '../component/Particles';
 import NavigationBar from './Navbar';
 import FooterSection from './footer';
+import { useNavigate } from 'react-router-dom';
 import '../styles/page.css'
 function LandingPage() {
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    navigate('/sign-up');
+  } 
+  const handleAboutPage = () => {
+    navigate('/about');
+  } 
   return(
     <>
       <NavigationBar/>
@@ -20,7 +29,7 @@ function LandingPage() {
                 Promoters Trading FX is a group of financial and cryptocurrency experts that invest in mining and cryptocurrency trading. We carefully examine the volatility of bitcoin and other crypto currencies, invest and make good profit from our investments.
               </p>
             </div>
-            <button>Get Started</button>
+            <button onClick={handleSignUp}>Get Started</button>
           </div>
         {/* <ParticlesBg/> */}
         </div>
@@ -35,7 +44,7 @@ function LandingPage() {
               <p>
                 Promoters Trading FX is a successful online trading and investment platform for brokers interested in Foreign Exchange, Stock Market Trading, and Cryptocurrency Trading. We give our users the potential to generate financial returns on both rising and falling prices across indices, FX, commodities, shares and cryptocurrencies. 
               </p>
-              <button>About Us</button>
+              <button onClick={handleAboutPage}>About Us</button>
             </div>
           </div>
         </section>
@@ -173,7 +182,7 @@ function LandingPage() {
                 </div>
               </div>
 
-              <button>Get Started</button>
+              <button onClick={handleSignUp}>Get Started</button>
             </div>
         </section>
 
@@ -218,7 +227,7 @@ function LandingPage() {
             <div className='basic-plan'>
               <p>Basic Plan</p>
               <h3>$200 - $999</h3>
-              <button>Get Started</button>
+              <button onClick={handleSignUp}>Get Started</button>
               <ul>
                 <li>Daily Profit:  5.00%</li>
                 <li>Minimum Possible Deposit:  $200</li>
@@ -230,7 +239,7 @@ function LandingPage() {
             <div className='silver-plan'>
               <p>Silver Plan</p>
               <h3>$1,000 - $4,999</h3>
-              <button>Get Started</button>
+              <button onClick={handleSignUp}>Get Started</button>
               <ul>
                 <li>Weekly Profit:  10.00%</li>
                 <li>Minimum Possible Deposit:  $1,000</li>
@@ -242,7 +251,7 @@ function LandingPage() {
             <div className='gold-plan'>
               <p>Gold Plan</p>
               <h3>$5,000 - $9,999</h3>
-              <button>Get Started</button>
+              <button onClick={handleSignUp}>Get Started</button>
               <ul>
                 <li>Monthly Profit:  8.00%</li>
                 <li>Minimum Possible Deposit:  $5,000</li>
@@ -254,7 +263,7 @@ function LandingPage() {
             <div className='platinum-plan'>
               <p>Platinum Plan</p>
               <h3>$10,000 - $50,000</h3>
-              <button>Get Started</button>
+              <button onClick={handleSignUp}>Get Started</button>
               <ul>
                 <li>Daily Profit:  5.00%</li>
                 <li>Minimum Possible Deposit:  $200</li>

@@ -3,11 +3,11 @@ import DashBars from "./dash-bar";
 import { useNavigate } from "react-router-dom";
 import '../styles/dashboard.css'
 
-function DepositPage ({username, email}) {
+function WithdrawalPage ({username, email}) {
   const navigate = useNavigate();
 
-  const handleProccedPayment= () => {  
-    navigate('/dashboard/deposits/payment'); // Navigate to the deposits page  
+  const handleProccedWithdraw= () => {  
+    navigate('/dashboard/withdraw/payment'); // Navigate to the deposits page  
   };
 
   return(
@@ -17,20 +17,20 @@ function DepositPage ({username, email}) {
       <DashBars username={username} email={email}/>     
       <div className="main">
         <div className="dashbord-ccontainer">
-          <h2 className="welcome-heading">Fund Your Account</h2>
+          <h2 className="welcome-heading">Withdrawal</h2>
 
           <div className="account-container">
             <div className="amount-input-div">
               <h3>Amount</h3>
-              <input type="number"  placeholder="Enter Amount to deposits" required/>
+              <input type="number"  placeholder="Enter Amount to Withdraw" required/>
             </div>
 
             <div className="choose-payment-div">
-              <h3>Choose Payment Method from the list below</h3>
+              <h3>Choose Payment Method </h3>
 
               <div className="payment-metthods">
                 <div className="btc-div">
-                  <input type="radio" name="currencies" value=''/>
+                  <input type="radio" name="currencies" id="" />
                   <img src="/icons/btc.png" alt="" width='25px'/>
                   <p>Bitcoin</p>
                 </div>
@@ -56,7 +56,7 @@ function DepositPage ({username, email}) {
                 </div>
               </div>
 
-              <button className="proceed-btn" onClick={handleProccedPayment}>Proceed Payment</button>
+              <button className="proceed-btn" onClick={handleProccedWithdraw}>Proceed Withdrawal</button>
             </div>
           </div>
 
@@ -71,4 +71,4 @@ function DepositPage ({username, email}) {
     </div>
   )
 }
-export default DepositPage;
+export default WithdrawalPage;

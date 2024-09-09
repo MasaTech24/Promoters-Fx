@@ -28,6 +28,9 @@ function DashBars({username, email}) {
   const handleDepositClick = () => {  
     navigate('/dashboard/deposits'); // Navigate to the deposits page  
   }; 
+  const handleWithdrawClick = () => {  
+    navigate('/dashboard/withdraw'); // Navigate to the deposits page  
+  }; 
 
   return(
     <>
@@ -69,7 +72,7 @@ function DashBars({username, email}) {
               className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
               <img src="/vite.svg" alt="" width='20px' />  
-              Invest  
+              Investment 
             </NavLink>  
           </li>
 
@@ -98,7 +101,7 @@ function DashBars({username, email}) {
         <div className="btn-div">
           <button onClick={handleDepositClick}>Deposit</button>
 
-          <button>Withdraw</button>
+          <button onClick={handleWithdrawClick}>Withdraw</button>
         </div>
       
         <div className="nav-profile">

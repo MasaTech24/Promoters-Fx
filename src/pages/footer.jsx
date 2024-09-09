@@ -14,7 +14,7 @@ export default function FooterSection(){
 
           <div className="newslatter-input-div">
             <input type="text" placeholder="Email" />
-            <button>Subscribe</button>
+            <button className="resp-sub-btn">Subscribe</button>
           </div>
         </div>
 

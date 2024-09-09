@@ -11,6 +11,9 @@ import Dashboard from './dashboardPage/dashboard';
 import DepositPage from './dashboardPage/deposite';
 import ProtectedRoute from './component/protectedRoute';
 import MakePayment from './dashboardPage/makePayment';
+import WithdrawalPage from './dashboardPage/withdraw';
+import MakeWithdrawalPayment from './dashboardPage/withdrawalPayment';
+import InvestPage from './dashboardPage/invest';
 // import './App.css'
 
 function App() {
@@ -140,6 +143,42 @@ function App() {
             </ProtectedRoute>  
           }  
         /> 
+        <Route   
+          path='/dashboard/withdraw'   
+          element={  
+            <ProtectedRoute isLoggedIn={isLoggedIn}>  
+              <WithdrawalPage   
+                username={username}   
+                email={email}   
+                onSignOut={handleSignOut}   
+              />  
+            </ProtectedRoute>  
+          }  
+        /> 
+        <Route   
+          path='/dashboard/withdraw/payment'   
+          element={  
+            <ProtectedRoute isLoggedIn={isLoggedIn}>  
+              <MakeWithdrawalPayment   
+                username={username}   
+                email={email}   
+                onSignOut={handleSignOut}   
+              />  
+            </ProtectedRoute>  
+          }  
+        />
+        <Route   
+          path='/dashboard/invest'   
+          element={  
+            <ProtectedRoute isLoggedIn={isLoggedIn}>  
+              <InvestPage   
+                username={username}   
+                email={email}   
+                onSignOut={handleSignOut}   
+              />  
+            </ProtectedRoute>  
+          }  
+        />
       </Routes>  
   </div>  
   )
