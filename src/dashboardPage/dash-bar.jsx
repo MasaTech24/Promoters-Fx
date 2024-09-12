@@ -4,15 +4,29 @@ import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from 'firebase/auth';
 import '../styles/dashboard.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
+import { 
+  faHome, faUser, 
+  faSignOutAlt, faChartLine,
+  faBars, faMoneyCheckAlt, 
+  faMoneyBillWaveAlt, faPlusCircle, 
+  faMinusCircle, faExchangeAlt,
+  faHeadset
+} from '@fortawesome/free-solid-svg-icons';
+
 
 function DashBars({username, email}) {
   const [toggle, setToggle] = useState(false);
+  const [menuToggle, setMenuToggle] = useState(false);
   const navigate = useNavigate();
 
 
   const handleClick = () =>{
     setToggle(!toggle)
     console.log('clicked')
+  }
+  const handleMenuClick = () =>{
+    setMenuToggle(!menuToggle);
   }
 
   const handleSignOut = () => {  
@@ -34,7 +48,7 @@ function DashBars({username, email}) {
 
   return(
     <>
-      <nav className="sidebar">
+      <nav className="sidebar resp-cls">
         <div className="Logo-div">
           <h2>Promoter <span> FX</span></h2>
         </div>
@@ -44,7 +58,7 @@ function DashBars({username, email}) {
             <NavLink  to='/dashboard'   
             className={({ isActive }) => isActive ? 'link active-nav' : 'link'} end>  
 
-              <img src="/vite.svg" alt="" width='20px' />  
+              <FontAwesomeIcon icon={faHome} />
               Dashboard  
             </NavLink>  
           </li>
@@ -53,7 +67,7 @@ function DashBars({username, email}) {
             <NavLink to='/dashboard/deposits'   
               className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
-              <img src="/vite.svg" alt="" width='20px' />  
+              <FontAwesomeIcon icon={faPlusCircle} size="lg"/> 
               Deposits 
             </NavLink>  
           </li>
@@ -62,7 +76,7 @@ function DashBars({username, email}) {
             <NavLink to='/dashboard/withdraw'   
               className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
-              <img src="/vite.svg" alt="" width='20px' />  
+              <FontAwesomeIcon icon={faMinusCircle} size="lg"/> 
               Withdraw  
             </NavLink>  
           </li>
@@ -71,16 +85,16 @@ function DashBars({username, email}) {
             <NavLink to='/dashboard/invest'   
               className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
-              <img src="/vite.svg" alt="" width='20px' />  
+              <FontAwesomeIcon icon={faChartLine} size="lg"/>
               Investment 
             </NavLink>  
           </li>
 
           <li className="nav-item">
             <NavLink to='/dashboard/transations'   
-              className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
+            className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
-              <img src="/vite.svg" alt="" width='20px' />  
+              <FontAwesomeIcon icon={faExchangeAlt } size="lg"/> 
               Transations  
             </NavLink>  
           </li>
@@ -88,7 +102,7 @@ function DashBars({username, email}) {
             <NavLink to='/dashboard/help%support'   
               className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
-              <img src="/vite.svg" alt="" width='20px' />  
+              <FontAwesomeIcon icon={faHeadset} size="lg"/>  
               Help & Support 
             </NavLink>  
           </li>
@@ -98,22 +112,104 @@ function DashBars({username, email}) {
 
       <div className="nave-bar">
 
-        <div className="btn-div">
-          <button onClick={handleDepositClick}>Deposit</button>
-
-          <button onClick={handleWithdrawClick}>Withdraw</button>
-        </div>
-      
-        <div className="nav-profile">
-          <img src="/vite.svg" alt="profile" className="toggle-btn"width='25px' onClick={handleClick}/>
-
-          {toggle ? 
-            <div className="dropdown toggled">
-              <h4>{username}</h4>
-              <p>{email}</p>
-              <button onClick={handleSignOut}>Sign out</button>
+        <FontAwesomeIcon icon={faBars} className="navbar-menu" size="lg" onClick={handleMenuClick}/>
+        {menuToggle ? 
+          <nav className="sidebar resp-open">
+            <div className="Logo-div">
+              <h2>Promoter <span> FX</span></h2>
             </div>
-          : <></>}
+            <ul className="sidebar-nav">
+    
+              <li className="nav-item">
+                <NavLink  to='/dashboard'   
+                className={({ isActive }) => isActive ? 'link active-nav' : 'link'} end>  
+    
+                  <FontAwesomeIcon icon={faHome} />
+                  Dashboard  
+                </NavLink>  
+              </li>
+    
+              <li className="nav-item">
+                <NavLink to='/dashboard/deposits'   
+                  className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
+    
+                  <FontAwesomeIcon icon={faPlusCircle} size="lg"/> 
+                  Deposits 
+                </NavLink>  
+              </li>
+    
+              <li className="nav-item">
+                <NavLink to='/dashboard/withdraw'   
+                  className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
+    
+                  <FontAwesomeIcon icon={faMinusCircle} size="lg"/> 
+                  Withdraw  
+                </NavLink>  
+              </li>
+    
+              <li className="nav-item">
+                <NavLink to='/dashboard/invest'   
+                  className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
+    
+                  <FontAwesomeIcon icon={faChartLine} size="lg"/>
+                  Investment 
+                </NavLink>  
+              </li>
+    
+              <li className="nav-item">
+                <NavLink to='/dashboard/transations'   
+                className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
+    
+                  <FontAwesomeIcon icon={faExchangeAlt } size="lg"/> 
+                  Transations  
+                </NavLink>  
+              </li>
+              <li className="nav-item">
+                <NavLink to='/dashboard/help%support'   
+                  className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
+    
+                  <FontAwesomeIcon icon={faHeadset}/>  
+                  Help & Support 
+                </NavLink>  
+              </li>
+              
+            </ul>
+          </nav> : <></>
+        }
+
+        <div className="nav-content-2">
+          <div className="btn-div">
+
+            <button onClick={handleDepositClick}>
+              <div className="deposits-cnet-dv">
+                <p>Deposit</p>
+                <FontAwesomeIcon icon={faMoneyBillWaveAlt} size="9px"/>
+              </div>
+            </button>
+
+            <button onClick={handleWithdrawClick}>
+            <div className="deposits-cnet-dv">
+              <p>Withdraw</p>
+              <FontAwesomeIcon icon={faMoneyCheckAlt} size="9px"/>
+            </div>
+            </button>
+          </div>
+        
+          <div className="nav-profile">
+            {/* <img src="/vite.svg" alt="profile" className="toggle-btn"width='25px' onClick={handleClick}/> */}
+
+            <div className="profile-div">
+              <FontAwesomeIcon icon={faUser} onClick={handleClick} className="toggle-btn" size="9px"/>
+            </div>
+
+            {toggle ? 
+              <div className="dropdown toggled">
+                <h4>{username}</h4>
+                <p>{email}</p>
+                <button onClick={handleSignOut}>Sign out</button>
+              </div>
+            : <></>}
+          </div>
         </div>
         
         {/* <main>

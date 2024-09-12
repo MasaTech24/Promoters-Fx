@@ -4,6 +4,12 @@ import { getDatabase, ref, onValue, update, get } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom"
 import DashBars from "./dash-bar";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
+import { 
+  faMoneyBillTrendUp, faCoins,
+  faMoneyBillAlt, faDatabase,
+  faMoneyCheckAlt , faGift
+} from '@fortawesome/free-solid-svg-icons';
 import '../styles/dashboard.css'
 
 export default function Dashboard({username, totalProfit, totalDeposit, totalBouns, totalInvestment, totalWithdrawal, email}) {
@@ -69,7 +75,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
           <div className="Account-holding-div">
             <div className="total-deposit-div">
               <div className="img-div">
-                <img src="vite.svg" alt="downloadicon"/>
+              <FontAwesomeIcon icon={faCoins } size="lg"/>
               </div>
               <div>
                 <strong>
@@ -80,7 +86,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
             <div className="total-profit-div">
               <div className="img-div">
-                <img src="vite.svg" alt="downloadicon"/>
+                <FontAwesomeIcon icon={faMoneyBillAlt} size="lg"/>
               </div>
               <div>
                 <strong>{formatCurrency(totalProfit)}</strong>
@@ -90,7 +96,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
             <div className="acc-balance-div">
               <div className="img-div">
-                <img src="vite.svg" alt="downloadicon"/>
+                <FontAwesomeIcon icon={faDatabase} size="lg"/>
               </div>
               <div>
                 <strong>{formatCurrency(accountBalance)}</strong>
@@ -100,7 +106,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
             <div className="total-bonus-div">
               <div className="img-div">
-                <img src="vite.svg" alt="downloadicon"/>
+                <FontAwesomeIcon icon={faGift} size="lg"/>
               </div>
               <div>
                 <strong>{formatCurrency(totalBouns)}</strong>
@@ -120,7 +126,8 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
             <div className="total-investment-plan-div">
               <div className="img-div">
-                <img src="vite.svg" alt="downloadicon"/>
+                {/* <img src="vite.svg" alt="downloadicon"/> */}
+                <FontAwesomeIcon icon={faMoneyBillTrendUp} size="lg"/>
               </div>
               <div>
                 <strong>{formatCurrency(totalInvestment)}</strong>
@@ -140,7 +147,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
             <div className="total-withdrawals-div">
               <div className="img-div">
-                <img src="vite.svg" alt="downloadicon"/>
+                <FontAwesomeIcon icon={faMoneyCheckAlt} size="lg"/>
               </div>
               <div>
                 <strong>{formatCurrency(totalWithdrawal)}</strong>

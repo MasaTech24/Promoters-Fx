@@ -93,12 +93,21 @@
   position: fixed;
   z-index: 999;
 }
+.navbar-menu{
+  margin-left: 158px;
+}
+.nav-content-2{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 60px;
+}
 .nav-profile{
   position: relative;
 }
 .dropdown{
   position: absolute;
-  top: 7vh;
+  top: 50px;
   right: 0;
   width: 260px;
   padding: 30px;
@@ -132,6 +141,11 @@
   width: 100%;
   scale: 1.05;
 }
+.profile-div{
+  border: 1px solid gray;
+  padding: 10px 12px;
+  border-radius: 100%;
+}
 .toggle-btn{
   cursor: pointer;
 }
@@ -141,8 +155,13 @@
 .btn-div{
   margin-left: 200px;
 }
+.deposits-cnet-dv{
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+}
 .btn-div button{
-  padding: 5px 16px;
+  padding: 8px 16px;
   font-size: 14px;
 }
 .btn-div button:nth-child(2){
@@ -500,4 +519,234 @@
 .invest-card{
   border: none;
   column-gap: 20px;
+}
+
+/* Teblet Responsive design  */
+@media screen and (max-width: 768px){
+  /* sidebar section */
+  .resp-cls{
+    display: none;
+    transition: left 0.3s ease;  
+  }
+  .resp-open {
+    width: 100%;
+    height: 100vh;
+    max-width: 280px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    top: 110px;
+    left: 0;
+    transition: left 0.3s ease;  
+    /* display: none; */
+  }
+  .btn-div {
+    display: none;
+  }
+  /* nav bar section  */
+  .nave-bar {
+    padding: 0 60px;
+  }
+  .navbar-menu{
+    margin-left: 0;
+    size: 9px;
+  }
+  .dropdown {
+    top: 78px;
+  }
+  
+  .dashbord-ccontainer {
+    padding: 0 60px;
+    /* height: 125vh; */
+    background-color: #212529;
+    padding-top: 100px;
+    margin-top: 100px;
+    margin-left: 0;
+  }
+  .sidebar .sidebar-nav {
+   row-gap: 10px;
+  }
+  li {
+    list-style: none;
+    padding: 40px;
+  }
+  .sidebar .sidebar-nav .nav-item .link {
+    font-family: Roboto, sans-serif;
+    font-size: 1.38rem;
+    align-items: center;
+    /* line-height: 1rem; */
+
+  }
+  .amount-input-div h3, 
+  .choose-payment-div h3, .wallet-address-and-proof h3 {
+    font-size: 25px;
+  }
+  .Account-holding-div {
+    display: grid;
+    grid-template-columns: repeat(2, 310px);
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+  .balance-card {
+    display: grid;
+    grid-template-columns: repeat(2, 310px);
+  }
+  .my-investment-div {
+    justify-content: center;
+    align-items: center;
+  }
+  .account-container {
+    background-color: #2C3034;
+    padding: 2.25rem;
+    height: 80vh;
+    padding-bottom: 0;
+    border-bottom: 1px solid #8094ae;
+  }
+  .amount-input-div input, .wallet-input, .proof-input {
+    display: block;
+    width: 580px;
+    height: calc(3.25rem + 2px);
+  }
+  .payment-metthods {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+  }
+  .proceed-btn, 
+  .make-payment {
+    margin-top: 20px;
+  }
+  .make-payment-container h4 {
+    font-size: 1.5rem;
+  }
+  .wallet-address input {
+    width: 510px;
+  }
+  .wallet-address button {
+    height: calc(3.25rem + 2px);
+  }
+  .selected-pm img{
+    width: 35px;
+  }
+  .selected-pm p{
+    font-size: 20px;
+  }
+  .network-type, 
+  .proof-of-payment p {
+    font-size: 22px;
+  }
+  .proof-of-payment p {
+    margin-bottom: 40px;
+  }
+  .proof-of-payment input {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+  .investment-container {
+    background-color: transparent;
+  }
+}
+
+/* phone size responsive designs */
+@media screen and (max-width: 475px){
+  /* side bar section  */
+  .resp-open {
+    width: 100%;
+    height: 100vh;
+    max-width: 280px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    top: 67px;
+    /* padding: 0 30px; */
+  }
+  .Logo-div h2 {
+    margin-right: 80px;
+  }
+  li {
+    list-style: none;
+    padding: 20px;
+  }
+  /* nav bar section */
+  .nave-bar {
+    padding: 0 30px;
+  }
+  .dropdown {
+    top: 55px;
+  }
+  /* dashbaord sections */
+  .dashbord-ccontainer {
+    padding: 0 30px;
+    padding-top: 40px;
+    margin-top: 60px;
+  }
+  .Account-holding-div,
+  .balance-card {
+    display: flex;
+    flex-direction:column;
+    width:100%;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+  .balance-card{
+    margin-top: 30px;
+  }
+  .balance-acc-div, 
+  .profit-acc-div, 
+  .my-investment-div {
+    margin:  0;
+  }
+  .my-investment-div{
+    margin-bottom: 30px;
+  }
+
+  /* deposits seciton  */
+  .amount-input-div input, 
+  .wallet-input, .proof-input {
+    width: 100%;
+  }
+  .account-container {
+    padding: 1.5rem;
+    height: max-content;
+  }
+  .amount-input-div h3, 
+  .choose-payment-div h3, .wallet-address-and-proof h3 {
+    font-size: 22px;
+  }
+
+  /* make payment page  */
+  .make-payment-container {
+    padding: 1.5rem;
+    width: 100%;
+  }
+  .make-payment-container h4 {
+    font-size: 1rem;
+  }
+  .selected-pm img {
+    width: 30px;
+  }
+  .selected-pm p {
+    font-size: 18px;
+  }
+  .wallet-address {
+    width: 100%;
+  }
+  .wallet-address input {
+    width: 215px;
+  }
+  .wallet-address button {
+    width: 50px;
+  }
+  .network-type, 
+  .proof-of-payment p {
+    font-size: 16px;
+    width: 100%;
+  }
+  .proof-of-payment input {
+    width: 215px;
+    margin-bottom: 30px;
+  }
+
+  /* investment page */
+  .investment-container {
+    height: max-content;
+    padding: 1.5rem;
+  }
 }

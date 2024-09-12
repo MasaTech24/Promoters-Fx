@@ -1,5 +1,8 @@
 import React from "react";
 import DashBars from "./dash-bar";
+// Font Awesome icon imported function 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
+import { faCopy  } from '@fortawesome/free-solid-svg-icons';
 import '../styles/dashboard.css'
 
 function MakePayment ({username, email}) {
@@ -28,7 +31,8 @@ function MakePayment ({username, email}) {
               <div className="wallet-address">
                 <input type="text" placeholder="wallet address" className="wallet-input"/>
                 <button>
-                  <img src="/vite.svg" alt="" width='25px'/>
+                  <FontAwesomeIcon icon={faCopy }/>
+                  {/* <img src="/vite.svg" alt="" width='25px'/> */}
                 </button>
               </div>
               <p className="network-type">

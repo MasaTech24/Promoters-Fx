@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 // import {animateScroll} from 'react-scroll'
 import { useNavigate } from 'react-router-dom';
 import '../styles/navbar.css';
-
 function NavigationBar () {
   // toggled navbar menu
   // const useToggle = (initialState) => {
@@ -73,6 +72,7 @@ function NavigationBar () {
         <Link to='/sign-in'>
           <button> 
             Sign In
+            {/* <FontAwesomeIcon icon="fa-solid fa-arrow-right-to-bracket" /> */}
           </button>
         </Link>
 
