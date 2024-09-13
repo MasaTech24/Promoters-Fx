@@ -2,9 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import DashBars from "./dash-bar";
 import { useLocation } from "react-router-dom";
+
 // Font Awesome icon imported function 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
 import { faCopy  } from '@fortawesome/free-solid-svg-icons';
+
+// firebase database imports
+import { ref, set } from 'firebase/database';  
+import {database} from '../firebase';
+// css imports
 import '../styles/dashboard.css';
 
 const walletAddresses = { 
@@ -21,14 +27,14 @@ const paymentImages = {
   'USDT (Bep20)': '/icons/usdt.png',  
   'eth (Erc20)': '/icons/ethrum.png'  
 }; 
-const handlePayment = () => {
-  alert('Deposits in progress...Wait for confirmation')
-}
+
 function MakePayment ({username, email}) {
   const location = useLocation(); // Use location to access passed state  
   const { selectedPaymentMethod } = location.state || {}; // Retrieve the selected payment method  
   const [walletAddress, setWalletAddress] = useState('');  
   const [paymentImage, setPaymentImages] = useState('');  
+  const [fileInput, setFileInput] = useState(null);
+  const [message, setMessage] = useState('');  
 
   // Set the wallet address based on the selected payment method  
   useEffect(() => {  
@@ -44,6 +50,37 @@ function MakePayment ({username, email}) {
     inputField.select(); // Select the input text  
     document.execCommand('copy'); // Copy the selected text  
     alert('Wallet address copied to clipboard!'); // Optional: provide feedback to the user  
+  }
+
+  const handleFileChange = (e) => {  
+    setFileInput(e.target.files[0]); 
+  }; 
+
+  const sanitizeFileName = (fileName) => {  
+    return fileName.replace(/[.#$[\]]/g, '_').replace(/\s+/g, '_');  
+  }; 
+
+  const handlePayment = async() => {
+    if (!fileInput) {  
+      setMessage('Please select a file to upload.');  
+      return;  
+    }  
+    const sanitizedFileName = sanitizeFileName(fileInput.name); // Sanitize the file name  
+
+    const fileRef = ref(database, 'users/' + sanitizedFileName); 
+
+    try{
+      await set(fileRef, {
+        name: sanitizedFileName,
+        uploadedAt: new Date().toISOString()
+      })
+      setMessage('file uploaded successfully')
+    }catch (error) {  
+      console.error('Error uploading file:', error);  
+      setMessage('Error uploading file.');  
+    }  
+
+    alert('Deposits in progress...Wait for confirmation')
   }
 
   return(
@@ -69,7 +106,7 @@ function MakePayment ({username, email}) {
               </div>
 
               <div className="wallet-address-and-proof">
-                <h3>{selectedPaymentMethod} Wallet Address:</h3>
+                <h3>{selectedPaymentMethod}  wallet Address:</h3>
 
                 <div className="wallet-address">
                   <input 
@@ -92,7 +129,10 @@ function MakePayment ({username, email}) {
                 <div className="proof-of-payment">
                   <p>Upload Payment proof after payment.
                   </p>
-                  <input type="file" className="proof-input"/>
+                  <input 
+                    type="file" className="proof-input"
+                    onChange={handleFileChange}
+                  />
                 </div>
 
                 <button className="make-payment" onClick={handlePayment}>Make Payment</button>

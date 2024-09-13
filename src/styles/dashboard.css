@@ -520,6 +520,9 @@
   border: none;
   column-gap: 20px;
 }
+.error-border{
+  border: 1px solid red;
+}
 
 /* Teblet Responsive design  */
 @media screen and (max-width: 768px){
