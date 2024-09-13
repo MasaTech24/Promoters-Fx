@@ -7,14 +7,39 @@ import '../styles/dashboard.css'
 function DepositPage ({username, email}) {
   const navigate = useNavigate();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");  
+  const [numberInput, setNumberInput] = useState('');
+  const [paymentMethod, setpaymentMethod] = useState('');
+  const [errors, setErrors] = useState({ numberInput: '', paymentMethod: '' });  
 
-  const handleProccedPayment= () => {  
-    navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod } }); //  Pass the selected payment method to the next page
+  const handleProccedPayment= (e) => { 
+    e.preventDefault
+    const newErrors = { numberInput: '', paymentMethod: '' };
+    let isValid = true;
+
+    // validate number input
+    if(!numberInput){
+      newErrors.numberInput = 'Enter amount to Deposit.';  
+      isValid = false;
+    }else if(isNaN(numberInput) || numberInput < 10){
+      newErrors.numberInput = 'Minimum Deposits should be atleast $10.';  
+      isValid = false;  
+    }
+    if (!paymentMethod) {  
+      newErrors.paymentMethod = 'Please select a payment method.';  
+      isValid = false;  
+    }  
+
+    setErrors(newErrors);  
+
+    if (isValid) {  
+      navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod } }); //  Pass the selected payment method to the next page
+    } 
   };
 
   // Handler function to update state when a radio button is selected  
   const handleChange = (e) => {
     setSelectedPaymentMethod(e.target.value);
+    setpaymentMethod(e.target.value);
   }
 
   return(
@@ -29,7 +54,16 @@ function DepositPage ({username, email}) {
           <div className="account-container">
             <div className="amount-input-div">
               <h3>Amount</h3>
-              <input type="number"  placeholder="Enter Amount to deposits" required/>
+              <input type="number"  
+                placeholder="Enter Amount to deposits" 
+                value={numberInput}   
+                onChange={(e) => setNumberInput(e.target.value)}
+                required
+                minLength='10'
+                />
+                {errors.numberInput && (  
+                  <span style={{ color: 'red', fontSize: '14px'}}>{errors.numberInput}</span>  // Display error for number input  
+                )}  
             </div>
 
             <div className="choose-payment-div">
@@ -43,6 +77,7 @@ function DepositPage ({username, email}) {
                     value="Bitcoin"
                     checked = {selectedPaymentMethod === 'Bitcoin'}
                     onChange={(handleChange)}
+                    min='10'
                   />
                   <img src="/icons/btc.png" alt="" width='25px'/>
                   <p>Bitcoin</p>
@@ -54,7 +89,7 @@ function DepositPage ({username, email}) {
                     value='USDT (Trc20)'
                     checked = {selectedPaymentMethod === 'USDT (Trc20)'}
                     onChange={handleChange}
-                     />
+                    />
                   <img src="/icons/usdt.png" alt="" width='25px'/>
                   <p>USDT TRC20</p>
                 </div>
@@ -90,8 +125,13 @@ function DepositPage ({username, email}) {
                     />
                   <img src="/icons/ethrum.png" alt="" width='25px'/>
                   <p>Etherum</p>
-                </div>
+                </div> <br/>
               </div>
+                <div style={{marginBottom: '20px'}}>
+                  {errors.paymentMethod && (  
+                    <span style={{ color: 'red', fontSize: '14px'}}>{errors.paymentMethod}</span>  
+                  )} 
+                </div>
               <button className="proceed-btn" onClick={handleProccedPayment}>Proceed Payment</button>
             </div>
           </div>

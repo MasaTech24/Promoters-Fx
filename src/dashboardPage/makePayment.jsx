@@ -20,7 +20,10 @@ const paymentImages = {
   'USDT (Erc20)': '/icons/usdt.png',  
   'USDT (Bep20)': '/icons/usdt.png',  
   'eth (Erc20)': '/icons/ethrum.png'  
-};  
+}; 
+const handlePayment = () => {
+  alert('Deposits in progress...Wait for confirmation')
+}
 function MakePayment ({username, email}) {
   const location = useLocation(); // Use location to access passed state  
   const { selectedPaymentMethod } = location.state || {}; // Retrieve the selected payment method  
@@ -92,7 +95,7 @@ function MakePayment ({username, email}) {
                   <input type="file" className="proof-input"/>
                 </div>
 
-                <button className="make-payment">Make Payment</button>
+                <button className="make-payment" onClick={handlePayment}>Make Payment</button>
               </div>
 
           </div>
