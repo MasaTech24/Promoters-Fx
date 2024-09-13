@@ -21,6 +21,7 @@ function SignUpUser(){
     getValues,
     formState: { errors },
   } = useForm();
+  
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [fullname, setFullname] = useState('');

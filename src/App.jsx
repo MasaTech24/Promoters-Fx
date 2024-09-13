@@ -72,6 +72,7 @@ function App() {
     setEmail('')
   };
 
+
   return (
     // <div>
     //   {!isLoggedIn ? (
@@ -137,7 +138,7 @@ function App() {
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
               <MakePayment   
                 username={username}   
-                email={email}   
+                email={email}
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  

@@ -1,14 +1,21 @@
 import React from "react";
+import { useState } from "react";
 import DashBars from "./dash-bar";
 import { useNavigate } from "react-router-dom";
 import '../styles/dashboard.css'
 
 function DepositPage ({username, email}) {
   const navigate = useNavigate();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");  
 
   const handleProccedPayment= () => {  
-    navigate('/dashboard/deposits/payment'); // Navigate to the deposits page  
+    navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod } }); //  Pass the selected payment method to the next page
   };
+
+  // Handler function to update state when a radio button is selected  
+  const handleChange = (e) => {
+    setSelectedPaymentMethod(e.target.value);
+  }
 
   return(
     <div>
@@ -30,32 +37,61 @@ function DepositPage ({username, email}) {
 
               <div className="payment-metthods">
                 <div className="btc-div">
-                  <input type="radio" name="currencies" value=''/>
+                  <input 
+                    type="radio" 
+                    name="currencies" 
+                    value="Bitcoin"
+                    checked = {selectedPaymentMethod === 'Bitcoin'}
+                    onChange={(handleChange)}
+                  />
                   <img src="/icons/btc.png" alt="" width='25px'/>
                   <p>Bitcoin</p>
                 </div>
                 <div className="usdt-div">
-                  <input type="radio" name="currencies" id="" />
+                  <input 
+                    type="radio" 
+                    name="currencies" 
+                    value='USDT (Trc20)'
+                    checked = {selectedPaymentMethod === 'USDT (Trc20)'}
+                    onChange={handleChange}
+                     />
                   <img src="/icons/usdt.png" alt="" width='25px'/>
                   <p>USDT TRC20</p>
                 </div>
                 <div className="usdt-div">
-                  <input type="radio" name="currencies" id="" />
+                  <input 
+                  type="radio" 
+                  name="currencies" 
+                  value='USDT (Erc20)'
+                  checked = {selectedPaymentMethod === 'USDT (Erc20)'}
+                  onChange={handleChange}
+                  />
                   <img src="/icons/usdt.png" alt="" width='25px'/>
                   <p>USDT ERC20</p>
                 </div>
                 <div className="usdt-div">
-                  <input type="radio" name="currencies" id="" />
+                  <input 
+                    type="radio" 
+                    name="currencies" 
+                    value='USDT (Bep20)'
+                    checked = {selectedPaymentMethod === 'USDT (Bep20)'}
+                    onChange={handleChange}
+                    />
                   <img src="/icons/usdt.png" alt="" width='25px'/>
                   <p>USDT BEP20</p>
                 </div>
                 <div className="eth-div">
-                  <input type="radio" name="currencies" id="" />
+                  <input  
+                    type="radio" 
+                    name="currencies"
+                    value='eth (Erc20)'
+                    checked = {selectedPaymentMethod == 'eth (Erc20)'}
+                    onChange={handleChange}
+                    />
                   <img src="/icons/ethrum.png" alt="" width='25px'/>
                   <p>Etherum</p>
                 </div>
               </div>
-
               <button className="proceed-btn" onClick={handleProccedPayment}>Proceed Payment</button>
             </div>
           </div>
