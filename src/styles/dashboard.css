@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+body{
+  background-color: #212529;
+}
 .navigate-bars{
   display: flex;
 }
@@ -524,6 +527,75 @@
   border: 1px solid red;
 }
 
+/* transaciton Styles  */
+.trans-table-head,
+.trans-table-body{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 10px;
+  border-bottom: 1px solid #8a8a8a;
+  margin-bottom: 30px;
+}
+.trans-table-head h3{
+  color: white;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.trans-table-body h4{
+  justify-self: center;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.trans-table-header h3,
+.trans-table-body h5{
+  color: white;
+  margin-bottom: 20px;
+}
+.trans-table-body .success, 
+.trans-table-body .depo-signs{
+  color: green;
+}
+.trans-table-body .pending, 
+.trans-table-body .withdraw-signs{
+  color: red;
+}
+
+/* support style */
+.support-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #dbdfea;
+  row-gap: 10px;
+}
+.support-div h2{
+  color: #dbdfea;
+  font-size: 28px;
+}
+.support-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+.support-form label{
+  margin-bottom: 20px;
+}
+.support-form textarea{
+  width:500px;
+  margin-bottom: 20px;
+  background-color: transparent;
+  padding: 20px;
+  color: white;
+  font-size: 16px;
+}
+.support-form button{
+  border: none;
+}
+
 /* Teblet Responsive design  */
 @media screen and (max-width: 768px){
   /* sidebar section */
@@ -646,6 +718,16 @@
   .investment-container {
     background-color: transparent;
   }
+  /* transactions */
+  .trans-table{
+    overflow: scroll;
+  }
+  .trans-table-head{
+    column-gap: 40px;
+  }
+  .trans-table-body {
+    column-gap: 10px;
+  }
 }
 
 /* phone size responsive designs */
@@ -751,5 +833,37 @@
   .investment-container {
     height: max-content;
     padding: 1.5rem;
+  }
+  /* transation page */
+  .trans-table-head {
+    column-gap: 40px;
+    width: max-content;
+  }
+  .trans-table {
+    width: 100%;
+  }
+  .trans-table-body {
+    column-gap: 60px;
+    justify-content: flex-start;
+    width: max-content;
+  }
+  /* .trans-table-body h4 {
+    /* width: 100%; */
+    /* font-size: 10px; 
+  } */
+  .support-div h2 {
+    font-size: 20px;
+  }
+  .support-div p {
+    font-size: 14px;
+  }
+  .support-div {
+    width: 100%;
+  }
+  .support-form {
+    width: 100%;
+  }
+  .support-form textarea {
+    width: 100%;
   }
 }

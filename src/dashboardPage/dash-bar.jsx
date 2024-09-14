@@ -99,7 +99,7 @@ function DashBars({username, email}) {
             </NavLink>  
           </li>
           <li className="nav-item">
-            <NavLink to='/dashboard/help%support'   
+            <NavLink to='/dashboard/support'    
               className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
 
               <FontAwesomeIcon icon={faHeadset} size="lg"/>  
@@ -165,7 +165,7 @@ function DashBars({username, email}) {
                 </NavLink>  
               </li>
               <li className="nav-item">
-                <NavLink to='/dashboard/help%support'   
+                <NavLink to='/dashboard/support'    
                   className={({ isActive }) => isActive ? 'link active-nav' : 'link'}>  
     
                   <FontAwesomeIcon icon={faHeadset}/>  

@@ -34,7 +34,9 @@ function MakePayment ({username, email}) {
   const [walletAddress, setWalletAddress] = useState('');  
   const [paymentImage, setPaymentImages] = useState('');  
   const [fileInput, setFileInput] = useState(null);
-  const [message, setMessage] = useState('');  
+  const [message, setMessage] = useState(''); 
+  const [fileValidation, setFileValidation] = useState();
+  const [errors, setErrors]  = useState({fileValidation: null})
 
   // Set the wallet address based on the selected payment method  
   useEffect(() => {  
@@ -54,6 +56,7 @@ function MakePayment ({username, email}) {
 
   const handleFileChange = (e) => {  
     setFileInput(e.target.files[0]); 
+    setFileValidation(e.target.files[0]); 
   }; 
 
   const sanitizeFileName = (fileName) => {  
@@ -67,7 +70,9 @@ function MakePayment ({username, email}) {
     }  
     const sanitizedFileName = sanitizeFileName(fileInput.name); // Sanitize the file name  
 
-    const fileRef = ref(database, 'users/' + sanitizedFileName); 
+    const fileRef = ref(database, 'users/' + sanitizedFileName);
+    const newErrors = {fileValidation: null} 
+    let isValid = true
 
     try{
       await set(fileRef, {
@@ -76,12 +81,21 @@ function MakePayment ({username, email}) {
       })
       setMessage('file uploaded successfully')
     }catch (error) {  
-      console.error('Error uploading file:', error);  
-      setMessage('Error uploading file.');  
+      console.error( error);  
+      setMessage(error.message);  
     }  
 
-    alert('Deposits in progress...Wait for confirmation')
+    if(!fileValidation){
+      setErrors.fileValidation = 'Please Upload your payment proof.';
+      isValid =false;
+    }
+    setErrors(newErrors)
+
+    if(isValid){
+      alert('Deposits in progress...Wait for confirmation')
+    }
   }
+
 
   return(
     <div>
@@ -132,7 +146,11 @@ function MakePayment ({username, email}) {
                   <input 
                     type="file" className="proof-input"
                     onChange={handleFileChange}
+                    required
                   />
+                  {errors.fileValidation && (  
+                  <span style={{ color: 'red', fontSize: '14px'}}>{errors.fileValidation}</span>  // Display error for number input  
+                )}
                 </div>
 
                 <button className="make-payment" onClick={handlePayment}>Make Payment</button>

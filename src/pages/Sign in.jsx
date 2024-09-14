@@ -21,7 +21,7 @@ function SignInUser({ onLogin}){
 
 
   // handle the submit 
-  const onSubmit =  async (data) => {
+  const onSubmit =  async () => {
     // console.log(data)
     try{
       const userCredential = await signInWithEmailAndPassword(auth, email, password);

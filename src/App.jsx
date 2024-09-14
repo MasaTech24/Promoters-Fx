@@ -14,6 +14,8 @@ import MakePayment from './dashboardPage/makePayment';
 import WithdrawalPage from './dashboardPage/withdraw';
 import MakeWithdrawalPayment from './dashboardPage/withdrawalPayment';
 import InvestPage from './dashboardPage/invest';
+import TransactionPage from './dashboardPage/transations';
+import SupportPage from './dashboardPage/support';
 // import './App.css'
 
 function App() {
@@ -173,6 +175,30 @@ function App() {
           element={  
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
               <InvestPage   
+                username={username}   
+                email={email}   
+                onSignOut={handleSignOut}   
+              />  
+            </ProtectedRoute>  
+          }  
+        />
+        <Route   
+          path='/dashboard/transations'   
+          element={  
+            <ProtectedRoute isLoggedIn={isLoggedIn}>  
+              <TransactionPage   
+                username={username}   
+                email={email}   
+                onSignOut={handleSignOut}   
+              />  
+            </ProtectedRoute>  
+          }  
+        />
+        <Route   
+          path='/dashboard/support'   
+          element={  
+            <ProtectedRoute isLoggedIn={isLoggedIn}>  
+              <SupportPage   
                 username={username}   
                 email={email}   
                 onSignOut={handleSignOut}   
