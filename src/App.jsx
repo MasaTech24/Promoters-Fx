@@ -2,16 +2,18 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getDatabase, ref, get } from 'firebase/database';
 // import NavigationBar from './pages/Navbar'
 import LandingPage from './pages/home';
 import AboutUs from './pages/about';
+import ContactUs from './pages/contact';
 import SignInUser from './pages/Sign in';
 import SignUpUser from './pages/sign-up';
 import Dashboard from './dashboardPage/dashboard';
 import DepositPage from './dashboardPage/deposite';
 import ProtectedRoute from './component/protectedRoute';
 import MakePayment from './dashboardPage/makePayment';
-import WithdrawalPage from './dashboardPage/withdraw';
+// import WithdrawalPage from './dashboardPage/withdraw';
 import MakeWithdrawalPayment from './dashboardPage/withdrawalPayment';
 import InvestPage from './dashboardPage/invest';
 import TransactionPage from './dashboardPage/transations';
@@ -26,31 +28,88 @@ function App() {
   const [totalInvestment, setTotalInvestment] = useState(0)
   const [totalWithdrawal, setTotalWithdrawal] = useState(0)
   const [email, setEmail] = useState('')
+  const [transactionHistory, setTransactionHistory] = useState([]); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   const auth = getAuth();  
 
   useEffect(() => {  
-    const unsubscribe = onAuthStateChanged(auth, (user) => {  
+    const unsubscribe = onAuthStateChanged(auth, async(user) => {  
       if (user) {  
         // User is signed in, set the logged-in state  
         setIsLoggedIn(true);  
         setUsername(user.username);
+        setEmail(user.email);
         setTotalProfit(user.totalProfit);
         setTotalDeposit(user.totalDeposit);
         setTotalBouns(user.totalBouns);
         setTotalInvestment(user.totalInvestment);
         setTotalWithdrawal(user.totalWithdrawal);
-        setEmail(user.email)
+        setTransactionHistory(user.transactions || [])
+        // await fetchUserData(user.uid)
       } else {  
         // User is signed out  
         setIsLoggedIn(false);  
+        resetUserData()
       }  
     });  
 
     // Cleanup subscription on unmount  
     return () => unsubscribe();  
   }, [auth]);  
+
+  // const fetchUserData = async (userId) => {
+  //   try{
+  //     // Fetch user data from your database  
+  //     const userRef = ref(database, `users/${userId}/transactions`);  
+  //     const userDataSnapshot = await get(userRef)
+  //     const userData = userDataSnapshot.val();  
+
+  //     // const userData = {
+  //     //   totalDeposit: userId.totalDeposit,
+  //     //   totalProfit: userId.totalProfit,
+  //     //   totalBouns : userId.totalBouns,
+  //     //   totalInvestment: userId.totalInvestment, 
+  //     //   totalWithdrawal: userId.totalWithdrawal,
+  //     //   transactions: []
+  //     // }
+  //     if (userData){
+  //       setTotalProfit(userData.totalProfit);
+  //       setTotalDeposit(userData.totalDeposit);
+  //       setTotalBouns(userData.totalBouns);
+  //       setTotalInvestment(userData.totalInvestment);
+  //       setTotalWithdrawal(userData.totalWithdrawal);
+  //       setTransactionHistory(userData.transactions || []);
+
+  //       // Fetch transaction details using the transaction ID  
+  //       const transactionId = userData.transactions; 
+
+  //       if(transactionId){
+  //         const transactionPromises = transactionId.map(async(id) => {
+
+  //           const transactionRef = ref(database, `transactions/${id}`);  
+  //           const transactionSnapshot = await get(transactionRef);  
+  //           return transactionSnapshot.val();
+  //         })
+  //         const transactionDetails = await Promise.all(transactionPromises)  
+  //         setTransactionHistory(transactionDetails)
+  //       }
+  //     }
+  //   } catch (error){
+  //     console.error("Error fetching user data:", error);  
+  //   }
+  // }
+
+  const resetUserData = () => {
+    setUsername(''); 
+    setTotalProfit(0);
+    setTotalDeposit(0);
+    setTotalBouns(0);
+    setTotalInvestment(0);
+    setTotalWithdrawal(0); 
+    setEmail('');
+    setTransactionHistory([]);
+  }
   
   
   const handleLoggedIn = (username, totalProfit, totalDeposit, totalBouns, totalInvestment, totalWithdrawal) => {
@@ -65,13 +124,7 @@ function App() {
 
   const handleSignOut = () => {  
     setIsLoggedIn(false);  
-    setUsername(''); 
-    setTotalProfit(0);
-    setTotalDeposit(0);
-    setTotalBouns(0);
-    setTotalInvestment(0);
-    setTotalWithdrawal(0); 
-    setEmail('')
+    resetUserData()
   };
 
 
@@ -103,6 +156,7 @@ function App() {
       <Routes>  
         <Route path='/' element={<LandingPage />} />  
         <Route path="/about" element={<AboutUs />} />  
+        <Route path="/contact-us" element={<ContactUs />} />  
         <Route path='/sign-in' element={<SignInUser onLogin={handleLoggedIn} />} />  
         <Route path='/sign-up' element={<SignUpUser />} />  
         <Route   
@@ -150,7 +204,7 @@ function App() {
           path='/dashboard/withdraw'   
           element={  
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
-              <WithdrawalPage   
+              <MakeWithdrawalPayment   
                 username={username}   
                 email={email}   
                 onSignOut={handleSignOut}   
@@ -158,7 +212,7 @@ function App() {
             </ProtectedRoute>  
           }  
         /> 
-        <Route   
+        {/* <Route   
           path='/dashboard/withdraw/payment'   
           element={  
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
@@ -169,7 +223,7 @@ function App() {
               />  
             </ProtectedRoute>  
           }  
-        />
+        /> */}
         <Route   
           path='/dashboard/invest'   
           element={  
@@ -188,7 +242,8 @@ function App() {
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
               <TransactionPage   
                 username={username}   
-                email={email}   
+                email={email} 
+                transactions={transactionHistory}  
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  

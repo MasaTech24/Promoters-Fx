@@ -4,9 +4,9 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
-body{
+/* body{
   background-color: #212529;
-}
+} */
 .navigate-bars{
   display: flex;
 }
@@ -417,6 +417,7 @@ body{
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
 .payment-metthods{
   display: grid;
   grid-template-columns: repeat(3, 190px);
@@ -462,6 +463,9 @@ body{
   width: 700px;
   /* height: 80vh; */
 }
+.witdrw-pymt-div{
+  width: 500px;
+}
 .make-payment-container h4{
   line-height: 1.4;
   font-size: 1.0375rem;
@@ -478,6 +482,12 @@ body{
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+}
+.witdrw-div{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 15px;
 }
 .wallet-address input{
   width: 410px;

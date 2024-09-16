@@ -20,8 +20,8 @@ function DepositPage ({username, email}) {
     if(!numberInput){
       newErrors.numberInput = 'Enter amount to deposits.';  
       isValid = false;
-    }else if(isNaN(numberInput) || numberInput < 10){
-      newErrors.numberInput = 'Minimum deposits should be atleast $10.'; 
+    }else if(isNaN(numberInput) || numberInput < 50){
+      newErrors.numberInput = 'Minimum deposits should be atleast $50.'; 
       isValid = false;  
     }
     if (!paymentMethod) {  
