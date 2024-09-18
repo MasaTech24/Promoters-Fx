@@ -5,32 +5,30 @@ import { getAuth } from "firebase/auth";
 import '../styles/dashboard.css'
 
 // function TransactionPage ({username, email, transactions = []}) {
-function TransactionPage ({username, email}) {
-  const [transactions, setTransaction] = useState([]);
+function TransactionPage ({username, email, transactions = []}) {
+  console.log(transactions)
+  // const [transactions, setTransaction] = useState([]);
 
-  const fetchUserData = async(userId) => {
-    try{
-      const auth = getAuth();
-      const database = getDatabase()
-      const userId = auth.currentUser.uid;
-      const userDataSnapshot = await ref(database, `users/${userId}`).once('value');
-      const userData = userDataSnapshot.val();  
+  // const fetchUserData = async (userId) => {
+  //   try{
+  //     // const auth = getAuth();
+  //     const database = getDatabase()
+  //     // const userId = auth.currentUser.uid;
+  //     const userDataSnapshot = await ref(database, `users/${userId}`).once('value');
+  //     const userData = userDataSnapshot.val();  
 
-      if (userData) {  
-        setTotalProfit(userData.totalProfit);  
-        setTotalDeposit(userData.totalDeposit);  
-        setTotalBouns(userData.totalBouns);  
-        setTotalInvestment(userData.totalInvestment);  
-        setTotalWithdrawal(userData.totalWithdrawal);  
-        setTransaction(userData.transactions || []); // Ensure it's an array  
-      }  
-    } catch (error) {  
-      console.error("Error fetching user data:", error);  
-    } 
-  }
-  useEffect(() =>{
-    fetchUserData()
-  }, [])
+  //     if (userData) {  
+  //       setTotalProfit(userData.totalProfit);  
+  //       setTotalDeposit(userData.totalDeposit);  
+  //       setTotalBouns(userData.totalBouns);  
+  //       setTotalInvestment(userData.totalInvestment);  
+  //       setTotalWithdrawal(userData.totalWithdrawal);  
+  //       setTransaction(userData.transactions || []); 
+  //     }  
+  //   } catch (error) {  
+  //     console.error("Error fetching user data:", error);  
+  //   } 
+  // }
 
   // useEffect(() =>{
   //   const auth = getAuth();
@@ -59,9 +57,7 @@ function TransactionPage ({username, email}) {
           <h2 className="welcome-heading">Transactions on your account
           </h2>
           <div className="account-container">
-            {transactions.length === 0 ? (
-              <h1>No Transaction Available</h1>
-            ): (
+            {transactions && transactions.length  > 0 ? (
               <div className="trans-table">
                 <div className="trans-table-head">
                   <h3>S/N</h3>
@@ -71,35 +67,24 @@ function TransactionPage ({username, email}) {
                   <h3>Transation</h3>
                   <h3>Date</h3>
                 </div>
-                <div className="trans-table-body">
-                  {transactions.map((transaction, i) => {
-                    < div key={i}>
-                      <h4>{i + 1}</h4>
-                      <h4>{transaction.amount}</h4>
-                      <h4>{transaction.paymentMethod}</h4>
-                      <h4 className={transaction.status === 'Success' ? "success" : 'pending'}>{transaction.status}</h4>
-                      <h4 className={transaction.transaction === 'withdraw' ? "withdraw-signs": "depo-signs"}>{transaction.transaction}</h4>
-                      <h4>{new Date(transaction.date).toLocaleDateString()}</h4>
-                    </div>
-                  })}
-                </div>
-                <div className="trans-table-body">
-                  <h4>2</h4>
-                  <h4>$ 1500</h4>
-                  <h4>Bitcoin</h4>
-                  <h4 className="pending">Pending</h4>
-                  <h4 className="withdraw-signs">Withdraw</h4>
-                  <h4>20/03/2023</h4>
-                </div>
-                <div className="trans-table-body">
-                  <h4>3</h4>
-                  <h4>$ 3000</h4>
-                  <h4>Bitcoin</h4>
-                  <h4 className="success">Success</h4>
-                  <h4 className="depo-signs">Deposit</h4>
-                  <h4>20/03/2023</h4>
-                </div>
+                <div className="trans-table-row">
+                  {transactions
+                   .slice() // Use slice to create a shallow copy of the array  
+                   .sort((a, b) => new Date(b.date) - new Date(a.date))
+                  .map((transaction, index) => (
+                      <div key={index} className="trans-table-body">
+                        <h4>{index + 1}</h4>
+                        <h4>{transaction.amount}</h4>
+                        <h4>{transaction.paymentMethod}</h4>
+                        <h4 className={transaction.status === 'Success' ? "success" : 'pending'}>{transaction.status}</h4>
+                        <h4 className={transaction.transaction === 'withdraw' ? "withdraw-signs": "depo-signs"}>{transaction.transaction}</h4>
+                        <h4>{new Date(transaction.date).toLocaleDateString()}</h4>
+                      </div>
+                  ))}
+                  </div>
               </div>
+            ): (
+              <h1>No Transaction Available</h1>
             )}
             
             {/* <table>

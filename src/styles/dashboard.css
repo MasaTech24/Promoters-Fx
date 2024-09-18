@@ -547,6 +547,10 @@
   border-bottom: 1px solid #8a8a8a;
   margin-bottom: 30px;
 }
+.trans-table-row{
+  overflow-y: scroll;
+  height: 400px;
+}
 .trans-table-head h3{
   color: white;
   margin-bottom: 30px;

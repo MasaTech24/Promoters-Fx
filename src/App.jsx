@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, get, onValue } from 'firebase/database';
 // import NavigationBar from './pages/Navbar'
 import LandingPage from './pages/home';
 import AboutUs from './pages/about';
@@ -40,13 +40,14 @@ function App() {
         setIsLoggedIn(true);  
         setUsername(user.username);
         setEmail(user.email);
-        setTotalProfit(user.totalProfit);
-        setTotalDeposit(user.totalDeposit);
-        setTotalBouns(user.totalBouns);
-        setTotalInvestment(user.totalInvestment);
-        setTotalWithdrawal(user.totalWithdrawal);
-        setTransactionHistory(user.transactions || [])
-        // await fetchUserData(user.uid)
+        // setTotalProfit(user.totalProfit);
+        // setTotalDeposit(user.totalDeposit);
+        // setTotalBouns(user.totalBouns);
+        // setTotalInvestment(user.totalInvestment);
+        // setTotalWithdrawal(user.totalWithdrawal);
+        // setTransactionHistory(user.transactions || [])
+
+        await fetchUserData(user.uid);
       } else {  
         // User is signed out  
         setIsLoggedIn(false);  
@@ -57,6 +58,37 @@ function App() {
     // Cleanup subscription on unmount  
     return () => unsubscribe();  
   }, [auth]);  
+
+  const fetchUserData = async (userId) => {
+    try{
+      const database = getDatabase();
+      const userRef = ref(database, `users/${userId}`);
+      // const userDataSnapshot = await get (userRef);
+      onValue(userRef, (userDataSnapshot) => {
+        const userData = userDataSnapshot.val();  
+        if (userData) {  
+          setTotalProfit(userData.totalProfit);  
+          setTotalDeposit(userData.totalDeposit);  
+          setTotalBouns(userData.totalBouns);  
+          setTotalInvestment(userData.totalInvestment);  
+          setTotalWithdrawal(userData.totalWithdrawal);  
+          setTransactionHistory(userData.transactions || []); 
+
+          const transactionRef = ref(database, `users/${userId}/transactions`);  
+          onValue(transactionRef, (snapshot) =>{
+            const transactions = [];
+            snapshot.forEach(childSnapshot => {  
+              transactions.push({ id: childSnapshot.key, ...childSnapshot.val() });  
+            }); 
+            setTransactionHistory(transactions);  
+          }) 
+        }  
+      })
+
+    } catch (error) {  
+      console.error("Error fetching user data:", error);  
+    } 
+  }
 
   // const fetchUserData = async (userId) => {
   //   try{

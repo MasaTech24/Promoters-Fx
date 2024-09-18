@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import DashBars from "./dash-bar";
-import { ref, set, push, getDatabase, onValue, runTransaction, update, } from 'firebase/database'; 
+import { ref, set, push, getDatabase, onValue, runTransaction } from 'firebase/database'; 
 import { getAuth } from "firebase/auth";
 
 function MakeWithdrawalPayment ({username, email}) {
@@ -123,7 +123,7 @@ function MakeWithdrawalPayment ({username, email}) {
             const transactionData = {
               amount: amount,
               paymentMethod: 'Bitcoin',
-              status: "Pending",
+              status: "Success",
               transaction: 'withdraw',
               date: new Date().toISOString()
 
