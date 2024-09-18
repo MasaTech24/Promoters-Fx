@@ -3,6 +3,8 @@ import { useState } from "react";
 import DashBars from "./dash-bar";
 import { useNavigate } from "react-router-dom";
 import '../styles/dashboard.css'
+import { set, ref, getDatabase, push } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 function DepositPage ({username, email}) {
   const navigate = useNavigate();
@@ -10,6 +12,7 @@ function DepositPage ({username, email}) {
   const [numberInput, setNumberInput] = useState('');
   const [paymentMethod, setpaymentMethod] = useState('');
   const [errors, setErrors] = useState({ numberInput: '', paymentMethod: '' });  
+  const [message, setMessage] = useState('')
 
   const handleProccedPayment= (e) => { 
     e.preventDefault
@@ -31,8 +34,34 @@ function DepositPage ({username, email}) {
 
     setErrors(newErrors);  
 
-    if (isValid) {  
-      navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod } }); //  Pass the selected payment method to the next page
+    if (isValid) { 
+      const amount = parseFloat(numberInput);
+      if (isNaN(amount) || amount <= 0) {  
+        setMessage('Please enter a valid amount.');  
+        return;  
+      } 
+      const auth = getAuth();
+      const userId = auth.currentUser.uid;
+      const database = getDatabase();
+      const transactionBaseRef = ref(database, `users/${userId}/transactions`);
+      const transactionRef = push(transactionBaseRef);
+      const transactionData = {
+        amount,
+        paymentMethod: selectedPaymentMethod,
+        status: "Pending",
+        transaction: 'deposits',
+        date: new Date().toISOString()
+      }
+      if(transactionRef){
+        set(transactionRef, transactionData)
+        .then(() => {
+          console.log('transaction saved successfully')
+          navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod } }); //  Pass the selected payment method to the next page
+        })
+        .catch((error) => {
+          console.error('Error saving transaction:', error);
+        })
+      }
     } 
   };
 
@@ -119,8 +148,8 @@ function DepositPage ({username, email}) {
                   <input  
                     type="radio" 
                     name="currencies"
-                    value='eth (Erc20)'
-                    checked = {selectedPaymentMethod == 'eth (Erc20)'}
+                    value='ETH (Erc20)'
+                    checked = {selectedPaymentMethod == 'ETH (Erc20)'}
                     onChange={handleChange}
                     />
                   <img src="/icons/ethrum.png" alt="" width='25px'/>

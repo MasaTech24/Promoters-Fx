@@ -1,12 +1,9 @@
 import DashBars from "./dash-bar";
-import { useState, useEffect } from "react";
-import { ref, getDatabase} from 'firebase/database';
-import { getAuth } from "firebase/auth"; 
 import '../styles/dashboard.css'
 
 // function TransactionPage ({username, email, transactions = []}) {
 function TransactionPage ({username, email, transactions = []}) {
-  console.log(transactions)
+  // console.log(transactions)
   // const [transactions, setTransaction] = useState([]);
 
   // const fetchUserData = async (userId) => {

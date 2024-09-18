@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy  } from '@fortawesome/free-solid-svg-icons';
 
 // firebase database imports
-import { ref, set } from 'firebase/database';  
-import {database} from '../firebase';
+import { ref, set, getDatabase} from 'firebase/database';  
+import { getAuth } from "firebase/auth";
 // css imports
 import '../styles/dashboard.css';
 
@@ -18,7 +18,7 @@ const walletAddresses = {
   'USDT (Trc20)': 'TTMFxrsD57TLhtRvXm9yFDtXGFRUDt3sqW',
   'USDT (Erc20)' :'0x8d940424813a4658c727c530b0c85e8d916b6558',
   'USDT (Bep20)': '0x8d940424813a4658c727c530b0c85e8d916b6558',
-  'eth (Erc20)': '0x8d940424813a4658c727c530b0c85e8d916b6558'
+  'ETH (Erc20)': '0x8d940424813a4658c727c530b0c85e8d916b6558'
 }
 const paymentImages = {  
   'Bitcoin': '/icons/btc.png',  
@@ -69,14 +69,18 @@ function MakePayment ({username, email}) {
       return;  
     }  
     const sanitizedFileName = sanitizeFileName(fileInput.name); // Sanitize the file name  
+    const auth = getAuth()
+    const userId = auth.currentUser.uid;
+    const database = getDatabase()
 
-    const fileRef = ref(database, 'users/' + sanitizedFileName);
+    const fileRef = ref(database, `users/${userId}/${sanitizedFileName}`);
     const newErrors = {fileValidation: null} 
     let isValid = true
 
     try{
       await set(fileRef, {
         name: sanitizedFileName,
+        file: fileInput,
         uploadedAt: new Date().toISOString()
       })
       setMessage('file uploaded successfully')

@@ -11,6 +11,7 @@ function MakeWithdrawalPayment ({username, email}) {
   const [message, setMessage] = useState('');
   const auth = getAuth();
   const [errors, setErrors] = useState({ withdrawAmount: '', btcInput: ''});  
+
   // const [transactionHistory, setTransactionHistory] = useState([]); 
 
   // const fetchTransactionHistory = () => {
@@ -87,7 +88,11 @@ function MakeWithdrawalPayment ({username, email}) {
     if (!btcInput) {  
       newErrors.btcInput = 'Please Enter your Bitcoin wallet';  
       isValid = false;  
-    } 
+    }
+    // else if(!btcInput < 34){
+    //   newErrors.btcInput = 'Invaid Bitcoin wallet';  
+    //   isValid = false;  
+    // }
     setErrors(newErrors)
 
     if(isValid){
@@ -180,61 +185,67 @@ function MakeWithdrawalPayment ({username, email}) {
 
   return(
     <div>
-    {/* for side bar  */}
-    <div className="navigate-bars"> 
-      <DashBars username={username} email={email}/>     
-      <div className="main">
-        <div className="dashbord-ccontainer mk-pymt-container">
-          <h2 className="welcome-heading mk-pm-h2">Happy Withdraw!</h2>
+      {/* for side bar  */}
+      <div className="navigate-bars"> 
+        <DashBars username={username} email={email}/>     
+        <div className="main">
+          <div className="dashbord-ccontainer mk-pymt-container">
+            <h2 className="welcome-heading mk-pm-h2">Happy Withdraw!</h2>
 
-          <div className="make-payment-container witdrw-pymt-div">
-            <h4>
-            Your Payment Method is Bitcoin.
-            </h4>
-            <div className="selected-pm">
-              <img src="/icons/btc.png" alt="" width='25px'/>
-              <p>BITCOIN</p>
-            </div>
-
-            <div className="wallet-address-and-proof">
-              {/* <h3>Bitcoin Wallet Address:</h3> */}
-
-              <div className="wallet-address witdrw-div">
-                <label>Enter Amount to withdraw</label>
-                <input 
-                  type="number" 
-                  placeholder="Enter Amount" className="wallet-input"
-                  value={withdrawAmount}
-                  onChange={(e) => setWithdrawAmount(e.target.value)}
-                />
-                {errors.withdrawAmount && (  
-                <span style={{ color: 'red', fontSize: '13px', marginTop: '-10px', marginBottom: '10px'}}>{errors.withdrawAmount}</span>  // Display error for number input  
-                )}
-
-                <label>Enter Bitcoin Address</label>
-                <input 
-                  type="text" 
-                  placeholder="wallet address" className="wallet-input"
-                  value={btcInput}
-                  onChange={(e) => setBtcInput(e.target.value)}
-                />
-                {errors.btcInput && (  
-                <span style={{ color: 'red', fontSize: '13px', marginTop: '-10px', marginBottom: '10px'}}>{errors.btcInput}</span>  // Display error for number input  
-                )}
+            <div className="make-payment-container witdrw-pymt-div">
+              <h4>
+              Your Payment Method is Bitcoin.
+              </h4>
+              <div className="selected-pm">
+                <img src="/icons/btc.png" alt="" width='25px'/>
+                <p>BITCOIN</p>
               </div>
-              <button className="make-payment" onClick={handleWithdraw}>Withdraw</button>
-              {message && <p style={{color: 'yellowgreen', fontSize: '13px', marginTop:'20px'}}>{message}</p>}  
-            </div>
 
-          </div>
-            {/* copyright seciton  */}
-            <div className="dashboard-copyright-div mk-pm-cpr">
-              <p>All Rights Reserved © Promoters FX 2024</p>
+              <div className="wallet-address-and-proof">
+                {/* <h3>Bitcoin Wallet Address:</h3> */}
+
+                <div className="wallet-address witdrw-div">
+                  <label>Enter Amount to withdraw</label>
+                  <input 
+                    type="number" 
+                    placeholder="Enter Amount" className="wallet-input"
+                    value={withdrawAmount}
+                    onChange={(e) => setWithdrawAmount(e.target.value)}
+                  />
+                  {errors.withdrawAmount && (  
+                  <span style={{ color: 'red', fontSize: '13px', marginTop: '-10px', marginBottom: '10px'}}>{errors.withdrawAmount}</span>  // Display error for number input  
+                  )}
+
+                  <label>Enter Bitcoin Address</label>
+                  <input 
+                    type="text" 
+                    placeholder="wallet address" className="wallet-input"
+                    value={btcInput}
+                    onInput={(e) => {
+                      if(e.target.value.length > 34){
+                        e.target.value = e.target.value.substring(0, 34)
+                      }
+                    }}
+                    onChange={(e) => setBtcInput(e.target.value)}
+                  />
+                  {errors.btcInput && (  
+                  <span style={{ color: 'red', fontSize: '13px', marginTop: '-10px', marginBottom: '10px'}}>{errors.btcInput}</span>  // Display error for number input  
+                  )}
+                </div>
+                <button className="make-payment" onClick={handleWithdraw}>Withdraw</button>
+                {message && <p style={{color: 'yellowgreen', fontSize: '13px', marginTop:'20px'}}>{message}</p>}  
+              </div>
+
             </div>
+              {/* copyright seciton  */}
+              <div className="dashboard-copyright-div mk-pm-cpr">
+                <p>All Rights Reserved © Promoters FX 2024</p>
+              </div>
+          </div>
         </div>
       </div>
-    </div>
 
+      
     </div>
   )
 }
