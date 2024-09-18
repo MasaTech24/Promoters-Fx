@@ -98,6 +98,8 @@
 }
 .navbar-menu{
   margin-left: 158px;
+  /* display: none; */
+  opacity: 0;
 }
 .nav-content-2{
   display: flex;
@@ -122,6 +124,12 @@
   border-radius: 5px;
   display: none;
 }
+.dr-profile-div{
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
 .dropdown h4{
   margin-bottom: 2px;
   font-size: 18px;
@@ -143,6 +151,12 @@
   background-color: yellowgreen;
   width: 100%;
   scale: 1.05;
+}
+.dr-signout-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
 }
 .profile-div{
   border: 1px solid gray;
@@ -402,7 +416,8 @@
 }
 .amount-input-div input,
 .wallet-input,
-.proof-input{
+.proof-input,
+.select-payment{
   display: block;
   width: 610px;
   height: calc(2.25rem + 2px);
@@ -416,6 +431,9 @@
   border: 1px solid #575962;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.select-payment{
+  width: 410px;
 }
 
 .payment-metthods{
@@ -638,6 +656,7 @@
   .navbar-menu{
     margin-left: 0;
     size: 9px;
+    opacity: 1;
   }
   .dropdown {
     top: 78px;
@@ -798,7 +817,8 @@
 
   /* deposits seciton  */
   .amount-input-div input, 
-  .wallet-input, .proof-input {
+  .wallet-input, 
+  .proof-input {
     width: 100%;
   }
   .account-container {

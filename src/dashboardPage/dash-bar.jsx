@@ -11,7 +11,8 @@ import {
   faBars, faMoneyCheckAlt, 
   faMoneyBillWaveAlt, faPlusCircle, 
   faMinusCircle, faExchangeAlt,
-  faHeadset
+  faHeadset,
+  faEnvelope 
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -179,18 +180,18 @@ function DashBars({username, email}) {
 
         <div className="nav-content-2">
           <div className="btn-div">
-
+            
             <button onClick={handleDepositClick}>
               <div className="deposits-cnet-dv">
-                <p>Deposit</p>
                 <FontAwesomeIcon icon={faMoneyBillWaveAlt} size="9px"/>
+                <p>Deposit</p>
               </div>
             </button>
 
             <button onClick={handleWithdrawClick}>
             <div className="deposits-cnet-dv">
-              <p>Withdraw</p>
               <FontAwesomeIcon icon={faMoneyCheckAlt} size="9px"/>
+              <p>Withdraw</p>
             </div>
             </button>
           </div>
@@ -204,9 +205,20 @@ function DashBars({username, email}) {
 
             {toggle ? 
               <div className="dropdown toggled">
+                <div className="dr-profile-div">
+                <FontAwesomeIcon icon={faUser} size="sm"/>
                 <h4>{username}</h4>
-                <p>{email}</p>
-                <button onClick={handleSignOut}>Sign out</button>
+                </div>
+                <div className="dr-profile-div">
+                  <FontAwesomeIcon icon={faEnvelope} size="sm" />
+                  <p>{email}</p>
+                </div>
+                <button onClick={handleSignOut}>
+                  <div className="dr-signout-btn">
+                  Sign out 
+                  <FontAwesomeIcon icon={faSignOutAlt } size="sm"/> 
+                  </div>
+                </button>
               </div>
             : <></>}
           </div>

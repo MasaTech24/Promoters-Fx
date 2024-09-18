@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useState } from "react";
-import { getDatabase, ref, onValue, update, get } from "firebase/database";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom"
 import DashBars from "./dash-bar";
@@ -10,6 +10,7 @@ import {
   faMoneyBillAlt, faDatabase,
   faMoneyCheckAlt , faGift
 } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
 import '../styles/dashboard.css'
 
 export default function Dashboard({username, totalProfit, totalDeposit, totalBouns, totalInvestment, totalWithdrawal, email}) {
@@ -30,6 +31,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
     const [accountBalance, setAccountBalance] = useState(0);
     const [profitBalance, setProfitBalance] = useState(0);
     const [bounsBalance, setBounsBalance] = useState(0);
+    const navigate = useNavigate();
     const auth = getAuth();
 
     useEffect(() => {
@@ -61,6 +63,16 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
       }
      }, [auth])
   // }
+
+  const handleWithdrawBtn = () => {
+    navigate('/dashboard/withdraw')
+  }
+  const handleInvestBtn = () => {
+    navigate('/dashboard/invest')
+  }
+  const handleAllInvestBtn = () => {
+    alert('System Busy!!!')
+  }
 
   return(
    // for nav bar 
@@ -175,8 +187,8 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
                   <strong>{formatCurrency(totalDeposit + totalProfit + totalInvestment)}</strong>
                 </div>
                 <div className="funds-button">
-                  <button>Withdraw Funds</button>
-                  <Link to='/dashboard/deposit' className="deposit-funds">Deposit Funds</Link>
+                  <button onClick={handleWithdrawBtn}>Withdraw Funds</button>
+                  <Link to='/dashboard/deposits' className="deposit-funds">Deposit Funds</Link>
                 </div>
               </div>
 
@@ -200,7 +212,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
                   <strong>{formatCurrency(totalProfit + 25)}</strong>
                 </div>
                 <div className="funds-button">
-                  <button>Invest & Earn</button>
+                  <button onClick={handleInvestBtn}>Invest & Earn</button>
                   <p className="deposit-funds">Earn up to 25$ each day!</p>
                 </div>
               </div>
@@ -222,8 +234,8 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
                   <strong>1,457.23</strong>
                 </div>
                 <div className="funds-button">
-                  <button>All Investment</button>
-                  <Link to='/dashboard/deposit' className="deposit-funds">Check out Analytic Report</Link>
+                  <button onClick={handleAllInvestBtn}>All Investment</button>
+                  <p className="deposit-funds">Check out Analytic Report</p>
                 </div>
               </div>
             </div>

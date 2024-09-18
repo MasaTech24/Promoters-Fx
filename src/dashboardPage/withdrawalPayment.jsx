@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 function MakeWithdrawalPayment ({username, email}) {
   const [totalDeposit, setTotalDeposit] = useState(0);  
   const [withdrawAmount, setWithdrawAmount] = useState('');  
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(""); 
   const [btcInput, setBtcInput] = useState('');  
   const [message, setMessage] = useState('');
   const auth = getAuth();
@@ -71,7 +72,11 @@ function MakeWithdrawalPayment ({username, email}) {
       return () => unsubscribe();   
     }  
     fetchTransactionHistory()
-  }, [auth.currentUser]);   
+  }, [auth.currentUser]);  
+  
+  const handleChange = (event) => {  
+    setSelectedPaymentMethod(event.target.value);
+}; 
 
   const handleWithdraw = () => {
     const newErrors = { withdrawAmount: '', btcInput: ''};
@@ -127,7 +132,7 @@ function MakeWithdrawalPayment ({username, email}) {
 
             const transactionData = {
               amount: amount,
-              paymentMethod: 'Bitcoin',
+              paymentMethod: selectedPaymentMethod,
               status: "Success",
               transaction: 'withdraw',
               date: new Date().toISOString()
@@ -215,8 +220,14 @@ function MakeWithdrawalPayment ({username, email}) {
                   {errors.withdrawAmount && (  
                   <span style={{ color: 'red', fontSize: '13px', marginTop: '-10px', marginBottom: '10px'}}>{errors.withdrawAmount}</span>  // Display error for number input  
                   )}
+                  <label>Select Payment Method</label>
+                  <select className="select-payment" value={selectedPaymentMethod} onChange={handleChange}>
+                    <option value='' disabled>Select Payment Method</option>
+                    <option value='USDT'>USDT</option>
+                    <option value="Bitcoin">Bitcoin</option>
+                  </select>
 
-                  <label>Enter Bitcoin Address</label>
+                  <label>Enter Wallet Address</label>
                   <input 
                     type="text" 
                     placeholder="wallet address" className="wallet-input"
