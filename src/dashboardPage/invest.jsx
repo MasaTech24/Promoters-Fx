@@ -1,11 +1,127 @@
 import React from "react";
 import DashBars from "./dash-bar";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import '../styles/dashboard.css'
 
 function InvestPage ({username, email}) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [baseInput, setBaseInput] =  useState('');
+  const [silverInput, setSilverInput] =  useState('');
+  const [goldInput, setGoldInput] =  useState('');
+  const [errors, setErrors] = useState({ baseInput: '', silverInput: '', goldInput: ''}); 
+  const newErrors = { baseInput: '', silverInput: '', goldInput: ''};
+  const [totalDeposit, setTotalDeposit] = useState(0);
+  const [message, setMessage] = useState('')
+  let isValid = true;
+
+  const auth = getAuth()
+  const user = auth.currentUser;  
+  useEffect(() => { 
+    if (user) {  
+      const database = getDatabase()
+      const balanceRef = ref(database, `users/${user.uid}/totalDeposit`);   
+       
+      const unsubscribe = onValue(balanceRef, (snapshot) => {
+        if (snapshot.exists()) {  
+          setTotalDeposit(snapshot.val());  
+        } else {  
+          console.log('No data available');  
+        }  
+      }, (error) => {
+        console.error('Error fetching balance:', error); 
+      })  
+      // Cleanup listener on unmount  
+      return () => unsubscribe();   
+    }  
+  }, [auth.currentUser]);  
+
+
+  const handleBasicPlan = () => {
+    if(!baseInput){
+      newErrors.baseInput = 'Enter amount to Invest.';  
+      isValid = false;
+    }else if(isNaN(baseInput) || baseInput < 200){
+      newErrors.baseInput = 'Minimum Invest  amount should be at least $200.'; 
+      isValid = false; 
+    }else if(isNaN(baseInput) || baseInput > 999){
+      newErrors.baseInput = 'Maximum Invest  amount should be $999.'; 
+      isValid = false; 
+    }
+    setErrors(newErrors)
+    if(isValid){
+      setBaseInput('')
+      const amount = parseFloat(baseInput);
+
+      if(isNaN(amount) || amount <= 0){
+        setMessage('Please enter a valid amount.');  
+        return; 
+      }
+      if (amount > totalDeposit) {  
+        setMessage('Insufficient balance.');  
+        navigate('/dashboard/deposits')
+        return;
+      }
+    }
+  }
+
+  const handleSliverPlan = () => {
+    if(!silverInput){
+      newErrors.silverInput = 'Enter amount to Invest.';  
+      isValid = false;
+    }else if(isNaN(silverInput) || silverInput < 1000){
+      newErrors.silverInput = 'Minimum Invest  amount should be at least $1000.'; 
+      isValid = false; 
+    }else if(isNaN(silverInput) || silverInput > 4999){
+      newErrors.silverInput = 'Maximum Invest  amount should be $4999.'; 
+      isValid = false; 
+    }
+    setErrors(newErrors);
+    if(isValid){
+      setSilverInput('')
+      const amount = parseFloat(silverInput);
+
+      if(isNaN(amount) || amount <= 0){
+        setMessage('Please enter a valid amount.');  
+        return; 
+      }
+      if (amount > totalDeposit) {  
+        setMessage('Insufficient balance.');  
+        navigate('/dashboard/deposits')
+        return;
+      }
+    }
+  }
+
+  const handleGoldPlan = () => {
+    if(!goldInput){
+      newErrors.goldInput = 'Enter amount to Invest.';  
+      isValid = false;
+    }else if(isNaN(goldInput) || goldInput < 5000){
+      newErrors.goldInput = 'Minimum Invest  amount should be at least $5000.'; 
+      isValid = false; 
+    }else if(isNaN(goldInput) || goldInput > 9000){
+      newErrors.goldInput = 'Maximum Invest  amount should be $9000.'; 
+      isValid = false; 
+    }
+    setErrors(newErrors);
+    if(isValid){
+      setGoldInput('')
+      const amount = parseFloat(goldInput);
+
+      if(isNaN(amount) || amount <= 0){
+        setMessage('Please enter a valid amount.');  
+        return; 
+      }
+      if (amount > totalDeposit) {  
+        setMessage('Insufficient balance.');  
+        navigate('/dashboard/deposits')
+        return;
+      }
+    }
+  }
 
   return(
     <div>
@@ -18,13 +134,12 @@ function InvestPage ({username, email}) {
 
           <div className="investment-container">
             <div className="choose-payment-div">
-            <h3>Choose your investment plan and start earning.</h3>
+              <h3>Choose your investment plan and start earning.</h3>
 
               <div className="balance-card invest-card">
                 <div className="balance-acc-div invest-acc-div">
-                  <h2 id="invest-start">Starter Plan</h2>
+                  <h2 id="invest-start">Basic Plan</h2>
                   <p className="acc-bal-p invest-paragraph">Enjoy entry level of invest & earn</p>
-                  {/* <h2>$25,500.00</h2> */}
                   <div className="invest-percent-div">
                     <div>
                       <h2 id="invest-start">1.67%</h2>
@@ -54,12 +169,39 @@ function InvestPage ({username, email}) {
                     <strong>125%</strong>
                   </div>
                   <div className="funds-button">
-                    <input type="number" placeholder="Enter amount" className="invest-amt"/>
-                    <button className="invest-btn">Invest</button>
-                    {/* <p to='/dashboard/deposit' className="deposit-funds">Deposit Funds</p> */}
+                    <input 
+                      type="number" 
+                      placeholder="Enter amount" className="invest-amt"
+                      value={baseInput}
+                      onChange={(e) => setBaseInput(e.target.value)}
+                    />
+                    {errors. baseInput && (
+                      <span 
+                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
+                        marginLeft: '-8px',
+                        display: 'flex', 
+                        alignSelf: 'flex-start',
+                        justifySelf: 'flex-start',
+                        marginBottom: '10px'}}>
+                        {errors.baseInput}
+                      </span>
+                    )}
+                    {message && (
+                      <span 
+                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
+                        marginLeft: '-8px',
+                        display: 'flex', 
+                        alignSelf: 'flex-start',
+                        justifySelf: 'flex-start',
+                        marginBottom: '10px'}}>
+                        {message}
+                      </span>
+                    )} 
+                    <button className="invest-btn" onClick={handleBasicPlan}>Invest</button>
                   </div>
                 </div>
 
+                {/* for sliver plans  */}
                 <div className="balance-acc-div invest-acc-div">
                   <h2 id="invest-start">Sliver</h2>
                   <p className="acc-bal-p invest-paragraph">Best plan for user to investers</p>
@@ -93,12 +235,38 @@ function InvestPage ({username, email}) {
                     <strong>200%</strong>
                   </div>
                   <div className="funds-button">
-                    <input type="number" placeholder="Enter amount" className="invest-amt"/>
-                    <button className="invest-btn">Invest</button>
-                    {/* <p to='/dashboard/deposit' className="deposit-funds">Deposit Funds</p> */}
+                    <input 
+                      type="number" placeholder="Enter amount" className="invest-amt"
+                      value={silverInput}
+                      onChange={(e) => setSilverInput(e.target.value)}
+                    />
+                    {errors. silverInput && (
+                      <span 
+                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
+                        marginLeft: '-8px',
+                        display: 'flex', 
+                        alignSelf: 'flex-start',
+                        justifySelf: 'flex-start',
+                        marginBottom: '10px'}}>
+                        {errors.silverInput}
+                      </span>
+                    )}
+                    {message && (
+                      <span 
+                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
+                        marginLeft: '-8px',
+                        display: 'flex', 
+                        alignSelf: 'flex-start',
+                        justifySelf: 'flex-start',
+                        marginBottom: '10px'}}>
+                        {message}
+                      </span>
+                    )}
+                    <button className="invest-btn" onClick={handleSliverPlan}>Invest</button>
                   </div>
                 </div>
 
+                {/* for Gold plans  */}
                 <div className="balance-acc-div invest-acc-div">
                   <h2 id="invest-start">Gold</h2>
                   <p className="acc-bal-p invest-paragraph">Advance level of invest & earn</p>
@@ -132,9 +300,36 @@ function InvestPage ({username, email}) {
                     <strong>125%</strong>
                   </div>
                   <div className="funds-button">
-                    <input type="number" placeholder="Enter amount" className="invest-amt"/>
-                    <button className="invest-btn">Invest</button>
-                    {/* <p to='/dashboard/deposit' className="deposit-funds">Deposit Funds</p> */}
+                    <input 
+                      type="number" 
+                      placeholder="Enter amount" 
+                      className="invest-amt"
+                      value={goldInput}
+                      onChange={(e) => setGoldInput(e.target.value)}
+                    />
+                    {errors. goldInput && (
+                      <span 
+                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
+                        marginLeft: '-8px',
+                        display: 'flex', 
+                        alignSelf: 'flex-start',
+                        justifySelf: 'flex-start',
+                        marginBottom: '10px'}}>
+                        {errors.goldInput}
+                      </span>
+                    )}
+                    {message && (
+                      <span 
+                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
+                        marginLeft: '-8px',
+                        display: 'flex', 
+                        alignSelf: 'flex-start',
+                        justifySelf: 'flex-start',
+                        marginBottom: '10px'}}>
+                        {message}
+                      </span>
+                    )}
+                    <button className="invest-btn" onClick={handleGoldPlan}>Invest</button>
                   </div>
                 </div>
               </div>

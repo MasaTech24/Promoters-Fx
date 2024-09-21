@@ -1,10 +1,43 @@
 import React from "react";
+import { useRef} from "react";
+import emailjs from "@emailjs/browser"
 import DashBars from "./dash-bar";
-import { useNavigate } from "react-router-dom";
 import '../styles/dashboard.css'
 
+// const messageRef = useRef(message);
 function SupportPage ({username, email}) {
-  const navigate = useNavigate();
+  const form = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const serviceId = 'service_ul0gipd';
+    const templateId = 'template_i1cgepc';
+    const publicId = 'NMdgxVkNH4qWPTEUQ';
+
+    emailjs.sendForm(
+      serviceId,
+      templateId,
+      form.current,
+      publicId,
+    ).then((result) => {
+      console.log(result.text);
+      alert('Message Successfuly Sent');
+    }, (error) => {
+      console.error(error.text);
+    }) 
+
+    // try{
+    //   setLoading(true);
+    //   await emailjs.send(serviceId, templateId, {
+    //     message: message,
+    //   });
+    //   alert('email successfully sent');
+    // } catch(error){
+    //   console.log(`'error${error}`)
+    // } finally {
+    //   setLoading(false)
+    // }
+  }
 
   return(
     <div>
@@ -18,13 +51,15 @@ function SupportPage ({username, email}) {
             Promoters Trading FX Support
           </h2> 
           <p>For inquiries, suggestions or complains. Mail us</p>
-          <span>support@Promoters-tradingfx.com
-          </span>
+          <span>Pennywiseasset@gmail.com</span>
 
-          <form className="support-form">
+          <form className="support-form" ref={form} onSubmit={handleSubmit}>
             <label>Message <span>*</span></label>
-            <textarea rows='8' placeholder="Type your message"></textarea>
-            <button>Send</button>
+            <textarea
+              rows='8' 
+              placeholder="Type your message"
+              name='message'></textarea>
+            <button type="submit">Send</button>
           </form>
           </div>
 

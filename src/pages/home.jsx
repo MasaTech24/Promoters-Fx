@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import ParticlesComponent from '../component/Particles';
 import NavigationBar from './Navbar';
 import FooterSection from './footer';
@@ -6,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/page.css'
 function LandingPage() {
   const navigate = useNavigate();
+  const about = useRef(null);
+  const plan = useRef(null);
 
   const handleSignUp = () => {
     navigate('/sign-up');
@@ -34,7 +37,7 @@ function LandingPage() {
         {/* <ParticlesBg/> */}
         </div>
 
-        <section className='abt-section'>
+        <section className='abt-section' ref={about} id='about'>
           <div className="about-container">
             <div className='abt-img'>
               <img src="r.png" alt=""  />

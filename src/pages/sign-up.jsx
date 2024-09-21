@@ -12,16 +12,6 @@ import '../styles/sign-up.css'
 function SignUpUser(){
   // Countries selection state
   const [countries, setCountries] = useState([]);
-
-  // handle events
-  const {
-    register, 
-    handleSubmit, 
-    watch, 
-    getValues,
-    formState: { errors },
-  } = useForm();
-  
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [fullname, setFullname] = useState('');
@@ -33,6 +23,16 @@ function SignUpUser(){
   // sign up Error message authetication 
   const [errorMessage, setErrorMessage] = useState('');  
 
+
+  // handle events
+  const {
+    register, 
+    handleSubmit, 
+    watch, 
+    getValues,
+    formState: { errors },
+  } = useForm();
+
   // countries effects 
   useEffect(() => {
     const data = CountryData;
@@ -40,8 +40,9 @@ function SignUpUser(){
   }, [])
 
   // handle the submit 
-  const onSubmit =  async (data) => {
+  const onSubmit =  async () => {
     // console.log(data)
+    sendEmail();
     try{
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -143,6 +144,7 @@ function SignUpUser(){
                 </svg>
                 <input 
                   type="text" 
+                  name="fullname"
                   {...register("fullname", {required: true, minLength: 6, maxLength: 10})}
                   placeholder="Enter Fullname" 
                   onChange={(e) => setFullname(e.target.value)} 
@@ -169,9 +171,11 @@ function SignUpUser(){
                 </svg>
                 <input 
                   type="text" 
+                  name="email"
                   {...register("email", {required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/})}
                   onChange = {(e) => setEmail(e.target.value)}
                   placeholder="email@example.com"  
+                  // name="user_email"
                   className={errors.email ? 'input-error pl-3r' : 'pl-3r' }
                 />
               </div>

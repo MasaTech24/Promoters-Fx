@@ -28,10 +28,10 @@ const paymentImages = {
   'eth (Erc20)': '/icons/ethrum.png'  
 }; 
 
-function MakePayment ({username, email}) {
+function MakePayment ({username, email, depositAmount }) {
   const location = useLocation(); // Use location to access passed state  
-  const { selectedPaymentMethod } = location.state || {}; // Retrieve the selected payment method  
-  const [walletAddress, setWalletAddress] = useState('');  
+  const { selectedPaymentMethod } = location.state || {}; 
+  const [walletAddress, setWalletAddress] = useState('');   
   const [paymentImage, setPaymentImages] = useState('');  
   const [fileInput, setFileInput] = useState(null);
   const [message, setMessage] = useState(''); 
@@ -112,7 +112,7 @@ function MakePayment ({username, email}) {
 
           <div className="make-payment-container">
             <h4>
-              You are to make payment of $100 using your selected payment method. Screenshot and upload the proof of payment
+              You are to make payment of ${depositAmount} using your selected payment method. Screenshot and upload the proof of payment
             </h4>
   
 

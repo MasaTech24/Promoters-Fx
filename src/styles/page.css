@@ -1027,7 +1027,7 @@ text-align: center;
 
   /* footer section  */
   .footer{
-    width: 859px;
+    width: 780px;
     padding: 60px 40px;
     /* height: max-content; */
   }
@@ -1063,6 +1063,10 @@ text-align: center;
     display: flex;
     flex-direction: row;
   }
+  .contact-div p {
+    width: 700px;
+    font-size: 1rem;
+}
 }
 @media screen and (max-width: 475px){
   .overLay {
@@ -1225,6 +1229,21 @@ text-align: center;
     margin-top: 30px;
   }
   .footer-logo p {
+    width: 100%;
+  }
+
+  /* CONTACT PAGE  */
+  .contact-div {
+    width: 100%;
+  }
+  .contact-div p {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+  .contact-div h2 {
+    font-size: 2rem;
+  }
+  .contact-div form {
     width: 100%;
   }
 }

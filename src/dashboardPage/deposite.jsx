@@ -6,7 +6,7 @@ import '../styles/dashboard.css'
 import { set, ref, getDatabase, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
-function DepositPage ({username, email}) {
+function DepositPage ({username, email, setAmount}) {
   const navigate = useNavigate();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");  
   const [numberInput, setNumberInput] = useState('');
@@ -31,7 +31,6 @@ function DepositPage ({username, email}) {
       newErrors.paymentMethod = 'Please select a payment method.';  
       isValid = false;  
     }  
-
     setErrors(newErrors);  
 
     if (isValid) { 
@@ -56,7 +55,7 @@ function DepositPage ({username, email}) {
         set(transactionRef, transactionData)
         .then(() => {
           console.log('transaction saved successfully')
-          navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod } }); //  Pass the selected payment method to the next page
+          navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod} }); //  Pass the selected payment method to the next page
         })
         .catch((error) => {
           console.error('Error saving transaction:', error);
@@ -64,6 +63,12 @@ function DepositPage ({username, email}) {
       }
     } 
   };
+
+  const handleAmtChange = (event) => {  
+    // const value = parseFloat();  
+    setNumberInput(event.target.value);  
+    setAmount(event.target.value); // Update the parent with the new amount  
+} ;
 
   // Handler function to update state when a radio button is selected  
   const handleChange = (e) => {
@@ -86,13 +91,13 @@ function DepositPage ({username, email}) {
               <input type="number"  
                 placeholder="Enter Amount to deposits" 
                 value={numberInput}   
-                onChange={(e) => setNumberInput(e.target.value)}
+                onChange={handleAmtChange}
                 required
                 minLength='10'
-                />
-                {errors.numberInput && (  
-                  <span style={{ color: 'red', fontSize: '14px'}}>{errors.numberInput}</span>  // Display error for number input  
-                )}  
+              />
+              {errors.numberInput && (  
+                <span style={{ color: 'red', fontSize: '14px'}}>{errors.numberInput}</span>  // Display error for number input  
+              )}  
             </div>
 
             <div className="choose-payment-div">

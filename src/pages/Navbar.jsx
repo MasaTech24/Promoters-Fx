@@ -1,9 +1,8 @@
 import React from 'react';
-// import SignInUser from './Sign in.jsx'
+import { useRef } from 'react';
 import { useState } from 'react';
 import {NavLink} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-// import {animateScroll} from 'react-scroll'
 import { useNavigate } from 'react-router-dom';
 import '../styles/navbar.css';
 function NavigationBar () {
@@ -16,6 +15,15 @@ function NavigationBar () {
 
   //   return[toggleValue, toggler]
   // }
+  const about = useRef(null);
+  const plan = useRef(null);
+
+  const scrollToSection = (elementRef) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop,
+      behavior: 'smooth'
+    })
+  }
 
   const [toggle, setToggle] = useState(false);
   // const [signUpSubmit, setSignUpSubmit] = useState()
@@ -47,8 +55,8 @@ function NavigationBar () {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/about" className='Link'
+          <li id='about'>
+            <NavLink to="#about" className='Link'
             style={({isActive}) => ({color: isActive ? 'yellowgreen' : 'white Link'})}>
               About Us
             </NavLink>

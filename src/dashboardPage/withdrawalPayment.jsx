@@ -12,54 +12,14 @@ function MakeWithdrawalPayment ({username, email}) {
   const [message, setMessage] = useState('');
   const auth = getAuth();
   const [errors, setErrors] = useState({ withdrawAmount: '', btcInput: ''});  
-
-  // const [transactionHistory, setTransactionHistory] = useState([]); 
-
-  // const fetchTransactionHistory = () => {
-  //   const auth = getAuth();
-  //   const database = getDatabase()
-  //   const userId = auth.currentUser.uid;
-  //   const transactionRef = ref(database, `users/${userId}/transactions`);
-
-  //   onValue(transactionRef, (snaphot) =>{
-  //     const transactions = [];
-  //     snaphot.forEach(childSnapshot => {
-  //       transactions.push({id: childSnapshot.key, ...childSnapshot.val()})
-  //     });
-  //     setTransactionHistory(transactions)
-  //   }, (error) => {
-  //     console.error('Error fetching transaction history:', error)
-  //   })
-  // }
   
   useEffect(() => { 
     const user = auth.currentUser;  
     if (user) {  
       const database = getDatabase()
       const balanceRef = ref(database, `users/${user.uid}/totalDeposit`);   
-
-      // runTransaction(balanceRef, (totalDeposit)=>{
-      //   if(totalDeposit === null){
-      //     return 0;
-      //   }
-      //   const newBalance = totalDeposit - amount;  
-      //   return newBalance >=0 ? newBalance : totalDeposit;
-      // })  
-      // .then((result) => {  
-      //   if(result.snapshot.exists()) {
-      //     setMessage('Withdrawal successful!');  
-      //   }else{
-      //     setMessage('Error processing withdrawal.')
-      //   }
-      //   // setAccountBalance(newBalance);  
-      // })  
-      // .catch((error) => {  
-      //   console.error('Transacation failed:', error);  
-      //   setMessage('Error processing withdrawal.');
-      // });
-      // get(balanceRef).then((snapshot) => {  
-      
-        const unsubscribe = onValue(balanceRef, (snapshot) => {
+       
+      const unsubscribe = onValue(balanceRef, (snapshot) => {
         if (snapshot.exists()) {  
           setTotalDeposit(snapshot.val());  
         } else {  

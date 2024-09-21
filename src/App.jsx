@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, ref, get, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue, } from 'firebase/database';
 // import NavigationBar from './pages/Navbar'
 import LandingPage from './pages/home';
 import AboutUs from './pages/about';
@@ -30,6 +30,11 @@ function App() {
   const [email, setEmail] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [amount, setAmountDpo] = useState('')
+
+  const handleDepositChange = (amount) => {  
+    setAmountDpo(amount);  
+  }; 
   
   const auth = getAuth();  
 
@@ -161,29 +166,6 @@ function App() {
 
 
   return (
-    // <div>
-    //   {!isLoggedIn ? (
-    //   <>
-    //     {/* <NavigationBar/> */}
-    //     {/* <LandingPage/> */}
-    //     <Routes>
-    //       <Route path='/' element={<LandingPage/>}/>
-    //       <Route path="/about" element={<AboutUs/>}/>
-    //       <Route path='/sign-in' element={<SignInUser onLogin={handleLoggedIn} />}/>
-    //       <Route path='/sign-up' element={<SignUpUser/>}/>
-    //     </Routes>
-    //   </>
-    //   ) : (
-    //     <Routes>
-    //       <Route path='/dashboard' element={<Dashboard 
-    //         username={username} 
-    //         totalProfit={totalProfit} totalDeposit={totalDeposit} totalBouns={totalBouns} totalInvestment={totalInvestment} totalWithdrawal={totalWithdrawal}
-    //       />}/>
-    //     </Routes>
-    //   )}
-    // </div>
-
-
     <div>  
       <Routes>  
         <Route path='/' element={<LandingPage />} />  
@@ -214,7 +196,8 @@ function App() {
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
               <DepositPage   
                 username={username}   
-                email={email}   
+                email={email}  
+                setAmount={handleDepositChange} 
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  
@@ -227,6 +210,7 @@ function App() {
               <MakePayment   
                 username={username}   
                 email={email}
+                amount={amount} 
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  
@@ -238,7 +222,7 @@ function App() {
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
               <MakeWithdrawalPayment   
                 username={username}   
-                email={email}   
+                email={email}  
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  
