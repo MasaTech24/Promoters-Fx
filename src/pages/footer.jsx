@@ -1,7 +1,45 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {NavLink} from 'react-router-dom';
 import '../styles/page.css'
 
-export default function FooterSection(){
+export default function FooterSection({homeRef, aboutRef, contactRef}){
+  // const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('home');
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {  
+      entries.forEach(entry => {  
+          if (entry.isIntersecting) {  
+              setActiveSection(entry.target.id); 
+          }  
+      });  
+    }); 
+
+    // Observe the sections  
+    const sections = [homeRef.current, aboutRef.current, contactRef.current];
+
+    sections.forEach(ref => {  
+      if (ref) {  
+          observer.observe(ref);  
+      }  
+    });  
+
+    return () => {
+      sections.forEach(ref => {  
+        if (ref) {  
+            observer.unobserve(ref);  
+        }  
+    });  
+};
+  }, [aboutRef, homeRef, contactRef]);
+
+  const scrollToSection = (ref) => {  
+    if (ref && ref.current) {  
+      window.scrollTo({  
+        top: ref.current.offsetTop,  
+        behavior: 'smooth',  
+      });  
+    }  
+  };
 
   return(
     <>
@@ -28,10 +66,28 @@ export default function FooterSection(){
 
           <div className="footer-nav">
             <h3>Navigation</h3>
-              <p><a href="#">Home</a></p>
-              <p><a href="#">About Us</a></p>
-              <p><a href="#">FAQs</a></p>
-              <p><a href="#">Contact Us</a></p>
+              <p>
+                <NavLink onClick={() =>  scrollToSection(homeRef)} style={{ color: activeSection === 'home' ? 'yellowgreen' : '#C2C2C2' }}>
+                  Home
+                </NavLink>
+                {/* <a href="#">Home</a> */}
+              </p>
+
+              <p>
+                <NavLink onClick={() => scrollToSection(aboutRef)}  style={{ color: activeSection === 'about' ? 'yellowgreen' : '#C2C2C2' }}>
+                  About Us
+                </NavLink>
+                {/* <a href="#">About Us</a> */}
+              </p>
+
+              <p>
+                <NavLink to='/contact-us' 
+                  onClick={() => scrollToSection(contactRef)}
+                 style={{color: activeSection === 'contact' ? 'yellowgreen' : '#C2C2C2' }}>
+                  Contact Us
+                </NavLink>
+                {/* <a href="#">Contact Us</a> */}
+              </p>
           </div>
 
           <div className="footer-legal-div">

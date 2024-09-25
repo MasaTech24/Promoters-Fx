@@ -3,7 +3,7 @@
   --bg: yellowgreen;
 }
 body{
-  background-color: white;
+  background-color: white !important;
 }
 *,  
 *:before,  
@@ -18,6 +18,7 @@ main{
   flex-direction: column;
   /* align-items: center; */
   justify-content: space-evenly;
+  background-color: white !important;
 }
 .container{
   background-image: url('../assets/finance.jpg');
@@ -62,12 +63,11 @@ h1{
 .abt-section{
   padding: 100px 60px;  
   margin-top: 100px;
-  /* z-index: 999; */
   position: relative;
-  /* top: 0; */
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 .about-container{
   display: flex;
@@ -681,14 +681,14 @@ text-align: center;
 .footer-legal-div p{
   margin-bottom: 10px;
 }
-.footer-nav a,
+.footer-nav p a,
 .footer-legal-div a,
 .footer-contaact-div p{
   color: #C2C2C2;
   text-decoration: none;
   font-family: "Poppins", Sans-serif;
 }
-.footer-nav a:hover,
+.footer-nav .link:hover,
 .footer-legal-div a:hover{
   color: #fff;
 }

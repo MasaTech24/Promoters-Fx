@@ -71,7 +71,7 @@ export default function ContactUs() {
           </form>
         </div>
       </section>
-      <FooterSection/>
+      <FooterSection homeRef={homeRef} aboutRef={aboutRef} contactRef={contactRef}/>
     </>
   )
 }

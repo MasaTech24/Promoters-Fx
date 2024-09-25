@@ -516,7 +516,7 @@ function LandingPage() {
         </section>
 
       </main>
-      <FooterSection/>
+      <FooterSection aboutRef={aboutRef} homeRef={homeRef} contactRef={contactRef}/>
     </>
   )
 }
