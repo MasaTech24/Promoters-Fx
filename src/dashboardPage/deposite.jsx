@@ -6,7 +6,7 @@ import '../styles/dashboard.css'
 import { set, ref, getDatabase, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
-function DepositPage ({username, email, setAmount}) {
+function DepositPage ({username, email}) {
   const navigate = useNavigate();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");  
   const [numberInput, setNumberInput] = useState('');
@@ -35,6 +35,7 @@ function DepositPage ({username, email, setAmount}) {
 
     if (isValid) { 
       const amount = parseFloat(numberInput);
+      // console.log("Amount:", amount )
       if (isNaN(amount) || amount <= 0) {  
         setMessage('Please enter a valid amount.');  
         return;  
@@ -54,8 +55,8 @@ function DepositPage ({username, email, setAmount}) {
       if(transactionRef){
         set(transactionRef, transactionData)
         .then(() => {
-          console.log('transaction saved successfully')
-          navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod} }); //  Pass the selected payment method to the next page
+          // console.log('transaction saved successfully')
+          navigate('/dashboard/deposits/payment', { state: { selectedPaymentMethod, depositAmount: amount} }); //  Pass the selected payment method to the next page
         })
         .catch((error) => {
           console.error('Error saving transaction:', error);
@@ -67,7 +68,7 @@ function DepositPage ({username, email, setAmount}) {
   const handleAmtChange = (event) => {  
     // const value = parseFloat();  
     setNumberInput(event.target.value);  
-    setAmount(event.target.value); // Update the parent with the new amount  
+    // setAmount(event.target.value); // Update the parent with the new amount  
 } ;
 
   // Handler function to update state when a radio button is selected  

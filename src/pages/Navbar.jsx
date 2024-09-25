@@ -1,33 +1,38 @@
-import React from 'react';
-import { useRef } from 'react';
-import { useState } from 'react';
-import {NavLink} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useEffect}from 'react';
+import {NavLink, Link, useNavigate} from 'react-router-dom';
 import '../styles/navbar.css';
-function NavigationBar () {
-  // toggled navbar menu
-  // const useToggle = (initialState) => {
-  //   // useToggle variable which holds the logic for the useToggle hook
-  //   const [toggleValue, setToggleValue] = useState(initialState)
-
-  //   const toggler = () => {setToggleValue(!toggleValue)};
-
-  //   return[toggleValue, toggler]
-  // }
-  const about = useRef(null);
-  const plan = useRef(null);
-
-  const scrollToSection = (elementRef) => {
-    window.scrollTo({
-      top: elementRef.current.offsetTop,
-      behavior: 'smooth'
-    })
-  }
-
+function NavigationBar ({homeRef, aboutRef, planRef, contactRef}) {
   const [toggle, setToggle] = useState(false);
-  // const [signUpSubmit, setSignUpSubmit] = useState()
   const navigate = useNavigate()
+  const [activeSection, setActiveSection] = useState('home'); // State to track active section  
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {  
+      entries.forEach(entry => {  
+          if (entry.isIntersecting) {  
+              setActiveSection(entry.target.id); 
+          }  
+      });  
+    }); 
+
+    // Observe the sections  
+    const sections = [homeRef.current, aboutRef.current, planRef.current, contactRef.current];
+
+    sections.forEach(ref => {  
+      if (ref) {  
+          observer.observe(ref);  
+      }  
+    });  
+
+    return () => {
+      sections.forEach(ref => {  
+        if (ref) {  
+            observer.unobserve(ref);  
+        }  
+    });  
+};
+  }, [aboutRef, homeRef, planRef, contactRef])
+
 
   const handleClick = () =>{
     setToggle(!toggle)
@@ -38,38 +43,46 @@ function NavigationBar () {
   } 
   const handleSignIn = () => {
     navigate('/sign-in');
-  } 
+  }
+  const scrollToSection = (ref) => {  
+    if (ref && ref.current) {  
+      window.scrollTo({  
+        top: ref.current.offsetTop,  
+        behavior: 'smooth',  
+      });  
+    }  
+  }; 
   return(
     <header>
       <div className='logo-container'>
         <strong className='logo'>
-            Promoters
+            PennyWise
           <span>FX</span></strong>
       </div>
       
       <nav className='navigation-bar'>
         <ul>
           <li>
-            <NavLink to="/"  className='Link'
-            style={({isActive}) => ({color: isActive ? 'yellowgreen' : 'white Link'})}>
+            <NavLink to="/" className='Link' onClick={() => scrollToSection(homeRef)}
+            style={{ color: activeSection === 'home' ? 'yellowgreen' : 'white' }}>
               Home
             </NavLink>
           </li>
-          <li id='about'>
-            <NavLink to="#about" className='Link'
-            style={({isActive}) => ({color: isActive ? 'yellowgreen' : 'white Link'})}>
+          <li>
+            <NavLink  className='Link' onClick={() => scrollToSection(aboutRef)}  style={{ color: activeSection === 'about' ? 'yellowgreen' : 'white' }}>
               About Us
             </NavLink>
           </li>
           <li>
-            <NavLink to='/plan'  className='Link'
-            style={({isActive}) => ({color: isActive ? 'yellowgreen' : 'white Link'})}>
+            <NavLink to='/' className='Link' onClick={() => scrollToSection(planRef)}
+            style={{color: activeSection === 'plan' ? 'yellowgreen' : 'white' }}>
               Plan
             </NavLink>
           </li>
           <li>
             <NavLink to='/contact-us' className='Link'
-            style={({isActive}) => ({color: isActive ? 'yellowgreen' : 'white Link'})}>
+            onClick={() => scrollToSection(contactRef)}
+            style={{color: activeSection === 'contact' ? 'yellowgreen' : 'white' }}>
               Contact Us
             </NavLink>
           </li>
@@ -95,10 +108,30 @@ function NavigationBar () {
         {toggle ? 
         
           <div className="dropdown-menu open">
-            <li><a href="#" className='Active'>Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Plans</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li>
+              <NavLink to="/" className='Link' onClick={() => scrollToSection(homeRef)}
+              style={{ color: activeSection === 'home' ? 'yellowgreen' : 'white' }}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink  className='Link' onClick={() => scrollToSection(aboutRef)}  style={{ color: activeSection === 'about' ? 'yellowgreen' : 'white' }}>
+                About Us
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/' className='Link' onClick={() => scrollToSection(planRef)}
+              style={{color: activeSection === 'plan' ? 'yellowgreen' : 'white' }}>
+                Plan
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/contact-us' className='Link'
+              onClick={() => scrollToSection(contactRef)}
+              style={{color: activeSection === 'contact' ? 'yellowgreen' : 'white' }}>
+                Contact Us
+              </NavLink>
+            </li>
             <li className='rsp-button'>                <button onClick={handleSignIn}> Sign In </button>
               <button onClick={handleSignUp}>Sign Up</button>
             </li>

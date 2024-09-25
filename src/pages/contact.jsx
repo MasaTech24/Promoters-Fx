@@ -3,14 +3,18 @@ import { useRef } from "react";
 import emailjs from "@emailjs/browser"
 import NavigationBar from "./Navbar"
 import FooterSection from './footer'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';  
 
 import '../styles/about.css'
 import '../styles/page.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ContactUs() {
   const form = useRef();
+  const aboutRef = useRef(null);
+  const homeRef = useRef(null);
+  const planRef = useRef(null);
+  const contactRef = useRef(null);
   
   function sendEmail(e) {
     e.preventDefault()
@@ -33,13 +37,13 @@ export default function ContactUs() {
 
   return (
     <>
-      <NavigationBar/>
+      <NavigationBar aboutRef={aboutRef} homeRef={homeRef} planRef={planRef} contactRef={contactRef}/>
       <div className='About-us-container'>
         <h1>Contact Us</h1>
       </div>
 
       
-      <section className='abt-section'>
+      <section className='abt-section' id="contact" ref={contactRef}>
         <div className="contact-div">
           <p>Want to consult about our services or having any troubles? just leave an email about your queries to get instant solution. Our support team is always glad to resolve your queries as soon as they can.</p>
           <h2>Leave A Message</h2>

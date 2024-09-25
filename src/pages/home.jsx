@@ -4,40 +4,49 @@ import ParticlesComponent from '../component/Particles';
 import NavigationBar from './Navbar';
 import FooterSection from './footer';
 import { useNavigate } from 'react-router-dom';
-import '../styles/page.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faLock, faMoneyBillWave, faExchangeAlt, 
+  faShieldAlt, faExclamationTriangle, faTrophy, 
+  faCog, faUserPlus, faDollarSign, faAppleAlt,
+  faWindowMaximize, faMobileAlt
+} from '@fortawesome/free-solid-svg-icons';  
+import '../styles/page.css';
+
 function LandingPage() {
   const navigate = useNavigate();
-  const about = useRef(null);
-  const plan = useRef(null);
+  const aboutRef = useRef(null);
+  const homeRef = useRef(null);
+  const planRef = useRef(null);
+  const contactRef = useRef(null);
 
   const handleSignUp = () => {
     navigate('/sign-up');
-  } 
-  const handleAboutPage = () => {
-    navigate('/about');
-  } 
+  }  
   return(
     <>
-      <NavigationBar/>
+      <NavigationBar aboutRef={aboutRef} homeRef={homeRef} planRef={planRef} contactRef={contactRef}/>
       <main>
-        <div className="container">
-        <ParticlesComponent/>
-          <div className="overLay">
-            <div className='contents'>
-              <h1>
-                Join The Global Leader Of Financial Investments
-              </h1>
+        <section ref={homeRef} id='home'>
+          <div className="container">
+          <ParticlesComponent/>
+            <div className="overLay" >
+              <div className='contents'>
+                <h1>
+                  Join The Global Leader Of Financial Investments
+                </h1>
 
-              <p>
-                Promoters Trading FX is a group of financial and cryptocurrency experts that invest in mining and cryptocurrency trading. We carefully examine the volatility of bitcoin and other crypto currencies, invest and make good profit from our investments.
-              </p>
+                <p>
+                  Pennywise Trading FX is a group of financial and cryptocurrency experts that invest in mining and cryptocurrency trading. We carefully examine the volatility of bitcoin and other crypto currencies, invest and make good profit from our investments.
+                </p>
+              </div>
+              <button onClick={handleSignUp}>Get Started</button>
             </div>
-            <button onClick={handleSignUp}>Get Started</button>
+          {/* <ParticlesBg/> */}
           </div>
-        {/* <ParticlesBg/> */}
-        </div>
+        </section>
 
-        <section className='abt-section' ref={about} id='about'>
+        <section className='abt-section' ref={aboutRef} id='about'>
           <div className="about-container">
             <div className='abt-img'>
               <img src="r.png" alt=""  />
@@ -45,9 +54,9 @@ function LandingPage() {
             <div className='abt-content'>
               <h2>Who we are</h2>
               <p>
-                Promoters Trading FX is a successful online trading and investment platform for brokers interested in Foreign Exchange, Stock Market Trading, and Cryptocurrency Trading. We give our users the potential to generate financial returns on both rising and falling prices across indices, FX, commodities, shares and cryptocurrencies. 
+                Pennywise Trading FX is a successful online trading and investment platform for brokers interested in Foreign Exchange, Stock Market Trading, and Cryptocurrency Trading. We give our users the potential to generate financial returns on both rising and falling prices across indices, FX, commodities, shares and cryptocurrencies. 
               </p>
-              <button onClick={handleAboutPage}>About Us</button>
+              {/* <button ref={homeRef} id='home'>About Us</button> */}
             </div>
           </div>
         </section>
@@ -62,11 +71,11 @@ function LandingPage() {
 
               <div className='three-div'>
                 <div className="secure-div">
-                  <img src="secure.svg" alt="" />
+                  <FontAwesomeIcon icon={faLock} size='2x' color='white' className='iconStyle'/>
                   <p>Secure <br /> Service</p>
                 </div>
-                <div className="multi-currency-div">
-                  <img src="secure.svg" alt="" /> 
+                <div  className="multi-currency-div">
+                  <FontAwesomeIcon icon={faMoneyBillWave} size='2x' color='white' className='iconStyle'/>
                   <p>
                     Multi <br /> 
                     Currency <br />
@@ -74,7 +83,7 @@ function LandingPage() {
                   </p>
                 </div>
                 <div className="currency-exchange-div">
-                  <img src="secure.svg" alt="" /> 
+                  <FontAwesomeIcon icon={faExchangeAlt} size='2x' color='white' className='iconStyle'/> 
                   <p>Currency <br /> Exchange</p>
                 </div>
               </div>
@@ -95,20 +104,20 @@ function LandingPage() {
           <div className='why-chooseUs-content'>
             <div className='bank-grade-div'>
               <div className='icon-div'>
-                <img src="secure.svg" alt="" width="30px"/>
+                <FontAwesomeIcon icon={faShieldAlt} size='2x'/>  
               </div>
               
               <div className='bank-grade-content'>
                 <h3>Bank Grade Security</h3>
                 <p>
-                  Promoters Trading FX team has extensive industry experience in system security within financial services and in-depth knowledge in blockchain. Profit Point Trading FX multi-layered state-of-the-art security measures to ensure the safety and security of its system.
+                  Pennywise Trading FX team has extensive industry experience in system security within financial services and in-depth knowledge in blockchain. Profit Point Trading FX multi-layered state-of-the-art security measures to ensure the safety and security of its system.
                 </p>
               </div>
             </div>
             
             <div className='risk-mng-div'>
               <div className='risk-icon-div'>
-                <img src="secure.svg" alt=""  width="30px"/>
+                <FontAwesomeIcon icon={faExclamationTriangle} size='2x'/>
               </div>
               
               <div className='risk-mng-content'>
@@ -121,7 +130,7 @@ function LandingPage() {
             
             <div className='award-div'>
               <div className='award-icon-div'>
-                <img src="secure.svg" alt="" width="30px"/>
+                <FontAwesomeIcon icon={faTrophy} size='2x'/>
               </div>
               
               <div className='award-content'>
@@ -134,7 +143,7 @@ function LandingPage() {
             
             <div className='automatic-div'>
               <div className='automatic-icon-div'>
-                <img src="secure.svg" alt="" width="30px"/>
+              <FontAwesomeIcon icon={faCog} size='2x'/>
               </div>
               
               <div className='automatic-content'>
@@ -158,7 +167,7 @@ function LandingPage() {
 
                 <div className='step1-contents-div'>
                   <div className='step1-img-div'>
-                    <img src="vite.svg" alt="" />
+                    <FontAwesomeIcon icon={faUserPlus} size='2x'/>
                     <p className='step1-p'>Step 1</p>
                   </div>
                   <p className='first-step'>Create a free account</p>
@@ -168,7 +177,7 @@ function LandingPage() {
 
                 <div className='step2-contents-div'>
                   <div className='step2-img-div'>
-                    <img src="vite.svg" alt="" />
+                  <FontAwesomeIcon icon={faDollarSign} size='2x'/>
                     <p className='step2-p'>Step 2</p>
                   </div>
                   <p className='second-step'>Fund your account</p>
@@ -178,7 +187,7 @@ function LandingPage() {
 
                 <div className='step3-contents-div'>
                   <div className='step3-img-div'>
-                    <img src="vite.svg" alt="" />
+                    <FontAwesomeIcon icon={faMoneyBillWave} size='2x'/>
                     <p className='step3-p'>Step 3</p>
                   </div>
                   <p className='third-step'>Withdraw your profits</p>
@@ -198,18 +207,18 @@ function LandingPage() {
 
               <div className='platforms-div'>
                 <div className='mac-div'>
-                  <img src="vite.svg" />
+                  <FontAwesomeIcon icon={faAppleAlt} size='2x'/>
                   <p>MacOS</p>
                 </div>
 
                 <div className='windows-div'>
-                  <img src="vite.svg" />
+                  <FontAwesomeIcon icon={faWindowMaximize} size='2x'/>
                   <p>Windows</p>
                 </div>
 
                 <div className='android-div'>
-                  <img src="vite.svg" alt="" />
-                  <p>Android</p>
+                <FontAwesomeIcon icon={faMobileAlt} size='2x'/>  
+                <p>Android</p>
                 </div>
               </div>
             </div>
@@ -220,10 +229,10 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className='investment-plan-section' id='plan'>
+        <section className='investment-plan-section' ref={planRef} id="plan">
           <h2>Investment Plans</h2>
           <p className='invest-plan-p'>
-            Promoters Trading FX has continued to provide groundbreaking investment solutions for over a decade.
+            Pennywise Trading FX has continued to provide groundbreaking investment solutions for over a decade.
           </p>
 
           <div className='investment-plans'>
@@ -263,7 +272,7 @@ function LandingPage() {
               </ul>
             </div>
 
-            <div className='platinum-plan'>
+            {/* <div className='platinum-plan'>
               <p>Platinum Plan</p>
               <h3>$10,000 - $50,000</h3>
               <button onClick={handleSignUp}>Get Started</button>
@@ -273,12 +282,13 @@ function LandingPage() {
                 <li>Maximum Possible Deposit:  $999</li>
                 <li>Duration:   2 Weeks</li>
               </ul>
-            </div>
+            </div> */}
 
           </div>
 
           {/* currency coverter */}
-          <div className="currency-coverter-container">
+          
+          {/* <div className="currency-coverter-container">
             <h3>Currency Converter</h3>
             <p className='currency-converter-p'>
               The Promoter Trading FX Currency Converter tool helps you to convert cryptocurrency to your local currency and vice versa
@@ -304,14 +314,15 @@ function LandingPage() {
                 </div>
               </div>
               <div className='change-div'>
-                {/* <div> */}
+                <div>
                   <p>Change: <span className='change-span'>0.52%</span></p>
                   <div><a href="#">⚡</a></div>
                   <p>Volume: <span className='volume-span'>$4.3B</span></p>
-                {/* </div> */}
+                </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          
         </section>
 
         <section className='trusted-section trusted-section2'>
@@ -451,7 +462,7 @@ function LandingPage() {
 
               <div className='card-body'>
                 <p>
-                  Promoters Trading FX runs a quick and reliable system. It feels great to know that I Can always trust their support system to come through for me CoinJoin. Their response speed is prompt and the delivery precise to the last detail.
+                  Pennywise Trading FX runs a quick and reliable system. It feels great to know that I Can always trust their support system to come through for me CoinJoin. Their response speed is prompt and the delivery precise to the last detail.
                 </p>
               </div>
             </div>

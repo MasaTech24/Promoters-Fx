@@ -51,7 +51,7 @@ function DashBars({username, email}) {
     <>
       <nav className="sidebar resp-cls">
         <div className="Logo-div">
-          <h2>Promoter <span> FX</span></h2>
+          <h2>PennyWise <span> FX</span></h2>
         </div>
         <ul className="sidebar-nav">
 
@@ -117,7 +117,7 @@ function DashBars({username, email}) {
         {menuToggle ? 
           <nav className="sidebar resp-open">
             <div className="Logo-div">
-              <h2>Promoter <span> FX</span></h2>
+              <h2>PennyWise <span> FX</span></h2>
             </div>
             <ul className="sidebar-nav">
     

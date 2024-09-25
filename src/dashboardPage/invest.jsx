@@ -61,7 +61,8 @@ function InvestPage ({username, email}) {
       }
       if (amount > totalDeposit) {  
         setMessage('Insufficient balance.');  
-        navigate('/dashboard/deposits')
+        alert('Insufficient Balance');
+        navigate('/dashboard/deposits');
         return;
       }
     }
@@ -89,6 +90,7 @@ function InvestPage ({username, email}) {
       }
       if (amount > totalDeposit) {  
         setMessage('Insufficient balance.');  
+        alert('Insufficient Balance');
         navigate('/dashboard/deposits')
         return;
       }
@@ -117,6 +119,7 @@ function InvestPage ({username, email}) {
       }
       if (amount > totalDeposit) {  
         setMessage('Insufficient balance.');  
+        alert('Insufficient Balance');
         navigate('/dashboard/deposits')
         return;
       }
@@ -177,23 +180,13 @@ function InvestPage ({username, email}) {
                     />
                     {errors. baseInput && (
                       <span 
-                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
-                        marginLeft: '-8px',
-                        display: 'flex', 
-                        alignSelf: 'flex-start',
-                        justifySelf: 'flex-start',
-                        marginBottom: '10px'}}>
+                       className="error-message-iv">
                         {errors.baseInput}
                       </span>
                     )}
                     {message && (
                       <span 
-                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
-                        marginLeft: '-8px',
-                        display: 'flex', 
-                        alignSelf: 'flex-start',
-                        justifySelf: 'flex-start',
-                        marginBottom: '10px'}}>
+                      className="error-message-iv">
                         {message}
                       </span>
                     )} 
@@ -241,24 +234,13 @@ function InvestPage ({username, email}) {
                       onChange={(e) => setSilverInput(e.target.value)}
                     />
                     {errors. silverInput && (
-                      <span 
-                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
-                        marginLeft: '-8px',
-                        display: 'flex', 
-                        alignSelf: 'flex-start',
-                        justifySelf: 'flex-start',
-                        marginBottom: '10px'}}>
+                      <span className="error-message-iv">
                         {errors.silverInput}
                       </span>
                     )}
                     {message && (
                       <span 
-                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
-                        marginLeft: '-8px',
-                        display: 'flex', 
-                        alignSelf: 'flex-start',
-                        justifySelf: 'flex-start',
-                        marginBottom: '10px'}}>
+                      className="error-message-iv">
                         {message}
                       </span>
                     )}
@@ -309,23 +291,13 @@ function InvestPage ({username, email}) {
                     />
                     {errors. goldInput && (
                       <span 
-                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
-                        marginLeft: '-8px',
-                        display: 'flex', 
-                        alignSelf: 'flex-start',
-                        justifySelf: 'flex-start',
-                        marginBottom: '10px'}}>
+                      className="error-message-iv">
                         {errors.goldInput}
                       </span>
                     )}
                     {message && (
                       <span 
-                        style={{ color: 'red', fontSize: '13px',marginTop: '-15px',
-                        marginLeft: '-8px',
-                        display: 'flex', 
-                        alignSelf: 'flex-start',
-                        justifySelf: 'flex-start',
-                        marginBottom: '10px'}}>
+                      className="error-message-iv">
                         {message}
                       </span>
                     )}

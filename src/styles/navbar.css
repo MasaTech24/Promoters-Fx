@@ -53,6 +53,7 @@ li a{
   color: var(--text-clr);
   font-size: 1.1rem;
   font-weight: 600;
+  cursor: pointer;
 }
 .Link:hover{
   color: var(--active-clr);

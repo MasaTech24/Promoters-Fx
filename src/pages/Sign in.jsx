@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { ref, get, update } from 'firebase/database';  
 import {auth, database} from '../firebase'
 import {signInWithEmailAndPassword} from "firebase/auth";
-import sendEmail from "../component/emailjs";
 import { useNavigate } from "react-router-dom";
 import '../styles/sign-up.css'
 
@@ -76,7 +75,7 @@ function SignInUser({ onLogin}){
       <div className="sign-container">
         <div className="logo-div">
           <h1 className="logo">
-            Promoters <span >FX</span>
+            PennyWise <span >FX</span>
           </h1>
         </div>
 
@@ -136,7 +135,7 @@ function SignInUser({ onLogin}){
               </div>
             </div>
             {/* Sign in footer section  */}
-            <div className="sign-in-footer">
+            {/* <div className="sign-in-footer">
               <div className="remember-me">
                 <input type="checkbox"/>
                 <label>Remember me</label>
@@ -145,7 +144,7 @@ function SignInUser({ onLogin}){
               <label>
                 <a href="">Forgotten password?</a>
               </label>
-            </div>
+            </div> */}
 
             <div className="submit-btn-div">
               <input type="submit"  />

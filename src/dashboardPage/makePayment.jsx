@@ -2,12 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import DashBars from "./dash-bar";
 import { useLocation } from "react-router-dom";
-
-// Font Awesome icon imported function 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
 import { faCopy  } from '@fortawesome/free-solid-svg-icons';
-
-// firebase database imports
 import { ref, set, getDatabase} from 'firebase/database';  
 import { getAuth } from "firebase/auth";
 // css imports
@@ -28,14 +24,14 @@ const paymentImages = {
   'eth (Erc20)': '/icons/ethrum.png'  
 }; 
 
-function MakePayment ({username, email, depositAmount }) {
-  const location = useLocation(); // Use location to access passed state  
-  const { selectedPaymentMethod } = location.state || {}; 
+function MakePayment ({username, email }) {
+  const location = useLocation();
+  const { selectedPaymentMethod, depositAmount } = location.state || {}; 
   const [walletAddress, setWalletAddress] = useState('');   
   const [paymentImage, setPaymentImages] = useState('');  
   const [fileInput, setFileInput] = useState(null);
   const [message, setMessage] = useState(''); 
-  const [fileValidation, setFileValidation] = useState();
+  const [fileValidation, setFileValidation] = useState('');
   const [errors, setErrors]  = useState({fileValidation: null})
 
   // Set the wallet address based on the selected payment method  
@@ -55,47 +51,50 @@ function MakePayment ({username, email, depositAmount }) {
   }
 
   const handleFileChange = (e) => {  
-    setFileInput(e.target.files[0]); 
-    setFileValidation(e.target.files[0]); 
-  }; 
+    if (e.target.files.length > 0) {  
+      setFileInput(e.target.files[0]); 
+      setFileValidation(e.target.files[0]);  
+    }  
+  };
 
   const sanitizeFileName = (fileName) => {  
     return fileName.replace(/[.#$[\]]/g, '_').replace(/\s+/g, '_');  
   }; 
 
-  const handlePayment = async() => {
-    if (!fileInput) {  
-      setMessage('Please select a file to upload.');  
-      return;  
-    }  
-    const sanitizedFileName = sanitizeFileName(fileInput.name); // Sanitize the file name  
-    const auth = getAuth()
-    const userId = auth.currentUser.uid;
-    const database = getDatabase()
-
-    const fileRef = ref(database, `users/${userId}/${sanitizedFileName}`);
-    const newErrors = {fileValidation: null} 
-    let isValid = true
-
-    try{
-      await set(fileRef, {
-        name: sanitizedFileName,
-        file: fileInput,
-        uploadedAt: new Date().toISOString()
-      })
-      setMessage('file uploaded successfully')
-    }catch (error) {  
-      console.error( error);  
-      setMessage(error.message);  
-    }  
+  const handlePayment = async() => { 
+    const newErrors = {fileInput: null};
+    let isValid = true;
+    
+    if (!fileInput) { 
+      setMessage('Please select a file to upload')
+      isValid = false; 
+    }  else{
+      const sanitizedFileName = sanitizeFileName(fileInput.name)
+      const auth = getAuth()
+      const userId = auth.currentUser.uid;
+      const database = getDatabase()
+      const fileRef = ref(database, `users/${userId}/${sanitizedFileName}`);
+      try{
+        await set(fileRef, {
+          name: sanitizedFileName,
+          file: fileInput,
+          uploadedAt: new Date().toISOString()
+        });
+        setMessage('file uploaded successfully')
+      }catch (error) {  
+        console.error( error);  
+        setMessage(error.message);  
+      } 
+    }
 
     if(!fileValidation){
-      setErrors.fileValidation = 'Please Upload your payment proof.';
+      newErrors.fileValidation = 'Please Upload your payment proof.';
       isValid =false;
     }
-    setErrors(newErrors)
 
-    if(isValid){
+    setErrors(newErrors);
+    
+    if(isValid){ 
       alert('Deposits in progress...Wait for confirmation')
     }
   }
@@ -148,12 +147,12 @@ function MakePayment ({username, email, depositAmount }) {
                   <p>Upload Payment proof after payment.
                   </p>
                   <input 
-                    type="file" className="proof-input"
                     onChange={handleFileChange}
+                    type="file" className="proof-input"
                     required
                   />
                   {errors.fileValidation && (  
-                  <span style={{ color: 'red', fontSize: '14px'}}>{errors.fileValidation}</span>  // Display error for number input  
+                  <span style={{ color: 'red', fontSize: '14px', marginTop: '-15px'}}>{errors.fileValidation}</span>  // Display error for number input  
                 )}
                 </div>
 

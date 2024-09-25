@@ -42,7 +42,7 @@ function SignUpUser(){
   // handle the submit 
   const onSubmit =  async () => {
     // console.log(data)
-    sendEmail();
+    // sendEmail();
     try{
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -67,6 +67,9 @@ function SignUpUser(){
           totalBouns: 0,
           totalInvestment: 0,
           totalWithdrawal: 0,
+          totalSiverPlan: 0,
+          totalGoldPlan: 0,
+          totalDiamondPlan: 0,
           firstLogin: true
         })
       }else{
@@ -96,7 +99,7 @@ function SignUpUser(){
       <div className="sign-container">
         <div className="logo-div">
           <h1 className="logo">
-            Promoters <span >FX</span>
+            PennyWise <span >FX</span>
           </h1>
         </div>
 
@@ -292,7 +295,7 @@ function SignUpUser(){
             </div>
 
             {/* References input section  */}
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Referral ID <span className="text-danger">*</span> </label>
               <div className="input-group">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  className="icon">
@@ -306,12 +309,12 @@ function SignUpUser(){
                     className={errors.country ? 'input-error pl-3r' : 'pl-3r' }
                   />
               </div>
-            </div>
+            </div> */}
             {/* Term & Condiction section  */}
-            <div className="t-and-c">
+            {/* <div className="t-and-c">
               <input type="checkbox"/>
               <label>I Accept the Terms And Privacy Policy</label>
-            </div>
+            </div> */}
 
             <div className="submit-btn-div">
               <input type="submit"  />

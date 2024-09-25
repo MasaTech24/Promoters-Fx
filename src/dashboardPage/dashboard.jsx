@@ -29,6 +29,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
   // const userBalanceListeener = () =>{
 
     const [accountBalance, setAccountBalance] = useState(0);
+    const [rewardBalance, setRewardBalance] = useState(0);
     const [profitBalance, setProfitBalance] = useState(0);
     const [bounsBalance, setBounsBalance] = useState(0);
     const navigate = useNavigate();
@@ -48,10 +49,12 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
             const newProfitBalance = data.totalProfit;
             const newAccountBalance = data.totalDeposit + data.totalProfit + data.totalInvestment;
             const newBounsBalance = data.totalProfit;
+            const newRewardBalance = data.totalReward;
 
             // update state 
             setProfitBalance(newProfitBalance);
             setAccountBalance(newAccountBalance);
+            setRewardBalance(newRewardBalance)
             setBounsBalance(newBounsBalance)
 
             // update Account balance in the database
@@ -187,8 +190,8 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
                   <strong>{formatCurrency(totalDeposit + totalProfit + totalInvestment)}</strong>
                 </div>
                 <div className="funds-button">
-                  <button onClick={handleWithdrawBtn}>Withdraw Funds</button>
-                  <Link to='/dashboard/deposits' className="deposit-funds">Deposit Funds</Link>
+                  <button id="desh-depos" onClick={handleWithdrawBtn}>Withdraw Funds</button>
+                  <Link to='/dashboard/deposits' className=" depos-funds deposit-funds">Deposit Funds</Link>
                 </div>
               </div>
 
@@ -205,7 +208,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
                 </div>
                 <div className="investment-funds">
                   <p>Rewards</p>
-                  <strong>$25.00</strong>
+                  <strong>$ 25.00</strong>
                 </div>
                 <div className="total-funds">
                   <p><strong>Total funds</strong></p>
@@ -242,7 +245,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
             {/* copyright seciton  */}
             <div className="dashboard-copyright-div">
-              <p>All Rights Reserved © Promoters FX 2024</p>
+              <p>All Rights Reserved © Pennywise FX 2024</p>
             </div>
           </div>
         </div>

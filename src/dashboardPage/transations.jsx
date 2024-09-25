@@ -56,19 +56,20 @@ function TransactionPage ({username, email, transactions = []}) {
           <div className="account-container">
             {transactions && transactions.length  > 0 ? (
               <div className="trans-table">
-                <div className="trans-table-head">
-                  <h3>S/N</h3>
-                  <h3>Amount</h3>
-                  <h3>Payment</h3>
-                  <h3>Status</h3>
-                  <h3>Transation</h3>
-                  <h3>Date</h3>
+                <div>
+                  <div className="trans-table-head">
+                    <h3>S/N</h3>
+                    <h3>Amount</h3>
+                    <h3>Payment</h3>
+                    <h3>Status</h3>
+                    <h3>Transation</h3>
+                    <h3>Date</h3>
+                  </div>
                 </div>
-                <div className="trans-table-row">
-                  {transactions
-                   .slice() // Use slice to create a shallow copy of the array  
-                   .sort((a, b) => new Date(b.date) - new Date(a.date))
-                  .map((transaction, index) => (
+                <div>
+                  <div className="trans-table-row">
+                    {transactions.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .map((transaction, index) => (
                       <div key={index} className="trans-table-body">
                         <h4>{index + 1}</h4>
                         <h4>{transaction.amount}</h4>
@@ -77,8 +78,9 @@ function TransactionPage ({username, email, transactions = []}) {
                         <h4 className={transaction.transaction === 'withdraw' ? "withdraw-signs": "depo-signs"}>{transaction.transaction}</h4>
                         <h4>{new Date(transaction.date).toLocaleDateString()}</h4>
                       </div>
-                  ))}
+                    ))}
                   </div>
+                </div>
               </div>
             ): (
               <h1>No Transaction Available</h1>

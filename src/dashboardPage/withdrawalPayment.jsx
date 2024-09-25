@@ -181,7 +181,7 @@ function MakeWithdrawalPayment ({username, email}) {
                   <span style={{ color: 'red', fontSize: '13px', marginTop: '-10px', marginBottom: '10px'}}>{errors.withdrawAmount}</span>  // Display error for number input  
                   )}
                   <label>Select Payment Method</label>
-                  <select className="select-payment" value={selectedPaymentMethod} onChange={handleChange}>
+                  <select className="select-payment wallet-input" value={selectedPaymentMethod} onChange={handleChange}>
                     <option value='' disabled>Select Payment Method</option>
                     <option value='USDT'>USDT</option>
                     <option value="Bitcoin">Bitcoin</option>

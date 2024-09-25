@@ -147,9 +147,9 @@ h1{
   border-radius: 10px;
   padding: 20px;
 }
-.secure-div img,
-.multi-currency-div img,
-.currency-exchange-div img{
+.secure-div .iconStyle,
+.multi-currency-div .iconStyle,
+.currency-exchange-div .iconStyle{
   margin-bottom: 20px;
 }
 .secure-div p,

@@ -30,11 +30,11 @@ function App() {
   const [email, setEmail] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [amount, setAmountDpo] = useState('')
+  // const [amount, setAmountDpo] = useState('')
 
-  const handleDepositChange = (amount) => {  
-    setAmountDpo(amount);  
-  }; 
+  // const handleDepositChange = (amount) => {  
+  //   setAmountDpo(amount);  
+  // }; 
   
   const auth = getAuth();  
 
@@ -197,7 +197,6 @@ function App() {
               <DepositPage   
                 username={username}   
                 email={email}  
-                setAmount={handleDepositChange} 
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  
@@ -210,7 +209,6 @@ function App() {
               <MakePayment   
                 username={username}   
                 email={email}
-                amount={amount} 
                 onSignOut={handleSignOut}   
               />  
             </ProtectedRoute>  
