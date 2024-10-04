@@ -24,6 +24,7 @@ function SignInUser({ onLogin}){
   const onSubmit =  async () => {
     // console.log(data)
     try{
+      document.querySelector('#sign-in').innerHTML = 'Signing In...'; 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       // Fetch user data from Realtime Database  
@@ -40,7 +41,6 @@ function SignInUser({ onLogin}){
         userData.totalInvestment, 
         userData.totalWithdrawal,
       ); 
-      
 
       if(userData.firstLogin){
         // Show notification  
@@ -56,6 +56,7 @@ function SignInUser({ onLogin}){
 
     }catch(error){
       console.log(error)
+      document.querySelector('#sign-in').innerHTML = 'Sign In'; 
       setErrorMessage(error.message)
        if (error.message = 'auth/wrong-password'){
         alert('Wrong Password');
@@ -74,9 +75,10 @@ function SignInUser({ onLogin}){
     <React.Fragment>
       <div className="sign-container">
         <div className="logo-div">
-          <h1 className="logo">
+        <img src="brand.png" className="logo"/>
+          {/* <h1 className="logo">
             PennyWise <span >FX</span>
-          </h1>
+          </h1> */}
         </div>
 
         {/* form contents containers  */}
@@ -145,10 +147,7 @@ function SignInUser({ onLogin}){
                 <a href="">Forgotten password?</a>
               </label>
             </div> */}
-
-            <div className="submit-btn-div">
-              <input type="submit"  />
-            </div>
+              <button type="submit"  id="sign-in">Sign in</button>
           </form>
 
           <div className="already-have-act-div">

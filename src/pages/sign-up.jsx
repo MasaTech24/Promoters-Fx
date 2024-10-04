@@ -44,6 +44,7 @@ function SignUpUser(){
     // console.log(data)
     // sendEmail();
     try{
+      document.querySelector('#sign-up').innerHTML = 'Signing Up...'; 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -85,6 +86,7 @@ function SignUpUser(){
       // alert('Sign up Successful');
       navigate('/sign-in');
     }catch(error){
+      document.querySelector('#sign-up').innerHTML = 'Sign Up'; 
         setErrorMessage(error.message)
       if(error.message = 'auth/email-already-in-use'){
         alert('The email address is already in use by another account');
@@ -98,9 +100,7 @@ function SignUpUser(){
     <React.Fragment>
       <div className="sign-container">
         <div className="logo-div">
-          <h1 className="logo">
-            PennyWise <span >FX</span>
-          </h1>
+        <img src="brand.png" className="logo"/>
         </div>
 
         {/* form contents containers  */}
@@ -315,10 +315,7 @@ function SignUpUser(){
               <input type="checkbox"/>
               <label>I Accept the Terms And Privacy Policy</label>
             </div> */}
-
-            <div className="submit-btn-div">
-              <input type="submit"  />
-            </div>
+            <button type="submit" id="sign-up">Sign Up</button>
           </form>
 
           <div className="already-have-act-div">

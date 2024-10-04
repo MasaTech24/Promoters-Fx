@@ -18,11 +18,8 @@
   height: max-content;
 }
 .logo{
-  color: white;
-  font-family: sans-serif;
-  font-size: 35px;
   margin-bottom: 20px;
-  text-align: center;
+  width: 150px;
 }
 .logo span{
   color: yellowgreen;
@@ -55,6 +52,9 @@
   font-weight: 700;
   font-family: "Nunito", sans-serif;
   color: rgb(77, 75, 75);
+}
+.foot-logo{
+  width: 90px;
 }
 .text-danger{
   color: #e43f52 !important;
@@ -132,7 +132,8 @@ select:focus{
   align-items: center;
   justify-content: center;
 }
-.submit-btn-div input{
+#sign-in,
+#sign-up{
   padding: 10px 30px !important;
   width: 100%;
   background-color: #FE7C0A !important;

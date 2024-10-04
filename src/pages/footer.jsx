@@ -58,7 +58,7 @@ export default function FooterSection({homeRef, aboutRef, contactRef}){
 
         <div className="footer-div footer_Dive">
           <div className="footer-logo">
-            <h2>PennyWise <span>FX</span></h2>
+          <img src="brand.png" className="foot-logo"/>
             <p>
               Founded and managed by leading industry professionals Pennywise Trading FX was established with a clear vision: To provide unrivaled trading solutions to investors from all over the world with a stellar client centered culture.
             </p>

@@ -30,11 +30,14 @@ body{
 }
 .Logo-div{
   border-bottom: 1px solid white;
-  padding-bottom: 20px ;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.dash-logo{
+  width: 100px;
+  /* margin-top: 20px; */
 }
 .Logo-div h2{
   font-size: 26px;

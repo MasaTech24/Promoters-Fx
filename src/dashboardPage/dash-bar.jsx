@@ -51,7 +51,8 @@ function DashBars({username, email}) {
     <>
       <nav className="sidebar resp-cls">
         <div className="Logo-div">
-          <h2>PennyWise <span> FX</span></h2>
+          <img src="brand.png" className="dash-logo"/>
+          {/* <h2>PennyWise <span> FX</span></h2> */}
         </div>
         <ul className="sidebar-nav">
 

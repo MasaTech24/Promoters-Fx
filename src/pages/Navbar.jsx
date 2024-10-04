@@ -55,9 +55,10 @@ function NavigationBar ({homeRef, aboutRef, planRef, contactRef}) {
   return(
     <header>
       <div className='logo-container'>
-        <strong className='logo'>
+        <img src="brand.png" className="logo"/>
+        {/* <strong className='logo'>
             PennyWise
-          <span>FX</span></strong>
+          <span>FX</span></strong> */}
       </div>
       
       <nav className='navigation-bar'>

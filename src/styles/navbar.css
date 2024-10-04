@@ -28,11 +28,12 @@ header{
 }
 .logo-container{
   width: 270px;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
 }
 .logo{
-  font-family: var(--font-style);
-  font-size: 2rem;
-  /* width: 500px; */
+  width: 140px;
 }
 i{
   color: var(--active-clr);
