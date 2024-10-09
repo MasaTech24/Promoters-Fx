@@ -4,6 +4,7 @@ import { getDatabase, ref, onValue, update } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom"
 import DashBars from "./dash-bar";
+import DashboardLayout from "./dashboardLayout"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
 import { 
   faMoneyBillTrendUp, faCoins,
@@ -74,7 +75,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
     navigate('/dashboard/invest')
   }
   const handleAllInvestBtn = () => {
-    alert('System Busy!!!')
+    alert('System Busy!!!');
   }
 
   return(
@@ -82,7 +83,7 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
     <div>
     {/* for side bar  */}
     <div className="navigate-bars"> 
-      <DashBars username={username} email={email}/>     
+      <DashboardLayout username={username} email={email}/>     
       <div className="main">
         <div className="dashbord-ccontainer">
           <h2 className="welcome-heading">Welcome, {username} !</h2>
@@ -222,19 +223,19 @@ export default function Dashboard({username, totalProfit, totalDeposit, totalBou
 
               <div className="my-investment-div">
                 <p className="acc-bal-p">My Investment</p>
-                <h2>2 Active</h2>
+                <h2>0 Active</h2>
 
                 <div className="available-funds">
                   <p>Silver </p>
-                  <strong>1,457.23</strong>
+                  <strong>0.00</strong>
                 </div>
                 <div className="investment-funds">
                   <p>Demond</p>
-                  <strong>1,045.21</strong>
+                  <strong>0.00</strong>
                 </div>
                 <div className="total-funds">
                   <p><strong>Total funds</strong></p>
-                  <strong>1,457.23</strong>
+                  <strong>0.00</strong>
                 </div>
                 <div className="funds-button">
                   <button onClick={handleAllInvestBtn}>All Investment</button>

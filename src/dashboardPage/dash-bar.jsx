@@ -51,7 +51,7 @@ function DashBars({username, email}) {
     <>
       <nav className="sidebar resp-cls">
         <div className="Logo-div">
-          <img src="brand.png" className="dash-logo"/>
+          <img src="/brand.png" className="dash-logo" alt="Brand Logo" />
           {/* <h2>PennyWise <span> FX</span></h2> */}
         </div>
         <ul className="sidebar-nav">
@@ -113,12 +113,12 @@ function DashBars({username, email}) {
       </nav>
 
       <div className="nave-bar">
-
         <FontAwesomeIcon icon={faBars} className="navbar-menu" size="lg" onClick={handleMenuClick}/>
         {menuToggle ? 
           <nav className="sidebar resp-open">
             <div className="Logo-div">
-              <h2>PennyWise <span> FX</span></h2>
+             <img src="/brand.png" className="dash-logo"/>
+              {/* <h2>PennyWise <span> FX</span></h2> */}
             </div>
             <ul className="sidebar-nav">
     

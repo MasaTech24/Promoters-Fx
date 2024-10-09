@@ -10,6 +10,7 @@ import ContactUs from './pages/contact';
 import SignInUser from './pages/Sign in';
 import SignUpUser from './pages/sign-up';
 import Dashboard from './dashboardPage/dashboard';
+import DashboardLayout from './dashboardPage/dashboardLayout';
 import DepositPage from './dashboardPage/deposite';
 import ProtectedRoute from './component/protectedRoute';
 import MakePayment from './dashboardPage/makePayment';
@@ -177,6 +178,7 @@ function App() {
           path='/dashboard'   
           element={  
             <ProtectedRoute isLoggedIn={isLoggedIn}>  
+              <DashboardLayout username={username} email={email}/>  
               <Dashboard   
                 username={username}   
                 totalProfit={totalProfit}   

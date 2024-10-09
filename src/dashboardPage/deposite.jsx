@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import DashBars from "./dash-bar";
+import DashboardLayout from "./dashboardLayout"
 import { useNavigate } from "react-router-dom";
 import '../styles/dashboard.css'
 import { set, ref, getDatabase, push } from "firebase/database";
@@ -81,7 +82,7 @@ function DepositPage ({username, email}) {
     <div>
     {/* for side bar  */}
     <div className="navigate-bars"> 
-      <DashBars username={username} email={email}/>     
+      <DashboardLayout username={username} email={email}/>     
       <div className="main">
         <div className="dashbord-ccontainer">
           <h2 className="welcome-heading">Fund Your Account</h2>
